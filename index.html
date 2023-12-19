@@ -3,9 +3,180 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Amoon</title>
+    <title>My Personal Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/cd66936424.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <h1>Hello World</h1>
+<div id="header">
+    <div class="container">
+        <nav>
+            <img src="images/logo.png" class="logo">
+            <ul>
+                <li><a href="#header">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="header-text">
+            <p>Computer Engineering student</p>
+                <h1>
+                    Hey, I'm Moamin Al-Juboori
+                </h1>
+            
+        </div>
+    </div>
+<!-- about -->
+</div>
+<div id="about">
+    <div class="container">
+        <div class="row">
+            <div class="about-col-1">
+                <img src="images/user.png" class="user">
+            </div>
+            <div class="about-col-2">
+                <h1 class = "sub-title"> About Me</h1>
+                <p>
+                I'm a student at the University of Guelph studying Computer Engineering currently in my junior year.
+                I am really passionate about software development as technology always caught my interest ever since I was a kid.
+                I have developed many skills during the past 3 years and I hope this website will give you an idea about myself!
+                </p>
+
+                <div class="tab-titles">
+                    <p class = "tab-links active-link" onclick="opentab('skills')">Skills</p>
+                    <p class = "tab-links" onclick="opentab('experience')">Experience</p>
+                    <p class = "tab-links" onclick="opentab('education')">Education</p>
+                </div>
+                <div class="tab-contents active-tab" id="skills">
+                    <ul>
+                        <li><span>Web Dev</span><br>Versed in front-end and back-end</li>
+                        <li><span>Software Dev</span><br>Proficient in Java, Python, and C</li>
+                        <li><span>Problem-Solving</span><br>Expert at troubleshooting code</li>
+                    </ul>
+                </div> <!-- Closing tag for skills tab-contents -->
+                <div class="tab-contents" id="experience">
+                    <ul>
+                        <li><span>No experience yet</span></li>
+                    </ul>
+                </div> <!-- Closing tag for experience tab-contents -->
+                <div class="tab-contents" id="education">
+                    <ul>
+                        <li><span>2021-2025</span><br>University of Guelph</li>
+                        <li><span>2017-2021</span><br>Stephen Lewis Secondary School</li>
+                    </ul>
+                </div> <!-- Closing tag for education tab-contents -->
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- projects -->
+<div id="projects">
+    <div class="container">
+        <h1 class = "sub-title"> My Projects</h1>
+        <div class="projects-list">
+            <div class = "projects">
+                <img src = "images/Sudoku Solver.png">
+                <div class="layer">
+                    <h3>Sudoku Solver</h3>
+                    <p>A python program to generate and solve any Sudoku puzzle using backtracking algorithm</p>
+                    <a href="https://github.com/AmooniG/Sudoku-Solver" target = "_blank"><i class="fa-brands fa-github"></i></a>
+                </div>
+            </div>
+            <div class = "projects">
+                <img src = "images/Weather App.png">
+                <div class="layer">
+                    <h3>WeatherApp</h3>
+                    <p>A website that lets the user enter a city and will be given weather information relatively using OpenWeatherMap API</p>
+                    <a href="https://github.com/AmooniG/WeatherApp" target = "_blank"><i class="fa-brands fa-github"></i></a>
+                </div>
+            </div>
+            <div class = "projects">
+                <img src = "images/Finance.png">
+                <div class="layer">
+                    <h3>Finance Tracker</h3>
+                    <p>A Finance app to provide automated transaction tracking, budgeting, investments integrated with RESTful APIs and used machine learning to give financial insight </p>
+                    <a href="https://github.com/AmooniG/Finance-Tracker" target = "_blank" ><i class="fa-brands fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+        <a href="https://github.com/AmooniG" target = "_blank" class = "btn">See More</a>
+    </div>
+</div>
+            <!-- <div>
+                <i class="fa-solid fa-pizza-slice"></i>
+                <h2>Project</h2>
+                <p>Description</p>
+                <a href="#">Learn more</a>
+            </div>
+            <div>
+                <i class="fa-solid fa-pizza-slice"></i>
+                <h2>Project</h2>
+                <p>Description</p>
+                <a href="#">Learn more</a>
+            </div>
+            <div>
+                <i class="fa-solid fa-pizza-slice"></i>
+                <h2>Project</h2>
+                <p>Description</p>
+                <a href="#">Learn more</a>
+            </div> -->
+<!-- Contact -->
+<section id="contact">
+    <div class="container contact-container">
+        <div class="contact-info">
+            <h2>Contact Me</h2>
+            <!-- Contact details -->
+            <p><i class="fas fa-envelope"></i> aljuboom@uoguelph.ca</p>
+            <p><i class="fas fa-phone"></i> +1 (647) 500-3796</p>
+            <!-- Social icons -->
+            <div class="social-icons">
+                <a href="https://www.linkedin.com/in/moamin-aljuboori/" target = "_blank"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            <a href="images/MoaminResume.pdf" download class="btn">Resume</a>
+        </div>
+        <div class="contact-form">
+            <form id="contact-form">
+            <form name="submit-to-google-sheet">
+                <input type="text" id="name" name="name" placeholder="Your Name" required>
+                <input type="email" id="email" name="email" placeholder="Your Email" required>
+                <textarea name="message" rows = "6" placeholder="Your Message"></textarea>
+                <button type="submit" class="btn btn2">Submit</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<script>
+
+    var tablinks = document.getElementsByClassName("tab-links");
+    var tabcontents = document.getElementsByClassName("tab-contents");
+    
+    function opentab(tabname){
+        for(tablink of tablinks){
+            tablink.classList.remove("active-link");
+        }
+        for(tabcontent of tabcontents){
+            tabcontent.classList.remove("active-tab");
+        }
+        event.currentTarget.classList.add("active-link");
+        document.getElementById(tabname).classList.add("active-tab");
+    }
+
+</script>
+<script>
+    const scriptURL ='https://script.google.com/macros/s/AKfycbwlRQhds0iwBG-lEeH_vi5T6CuL-eza7ct7P6-4rAFdC67dTtKK8r4TUifiiPGvyCzn/exec'
+    const form = document.forms['submit-to-google-sheet']
+  
+    form.addEventListener('submit', e => {
+      e.preventDefault()
+      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+        .then(response => console.log('Success!', response))
+        .catch(error => console.error('Error!', error.message))
+    })
+  </script>
+
 </body>
 </html>

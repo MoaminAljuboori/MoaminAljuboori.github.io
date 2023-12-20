@@ -135,50 +135,63 @@
             <p><i class="fas fa-phone"></i> +1 (647) 500-3796</p>
             <!-- Social icons -->
             <div class="social-icons">
-                <a href="https://www.linkedin.com/in/moamin-aljuboori/" target = "_blank"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://www.linkedin.com/in/moamin-aljuboori/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
             </div>
             <a href="images/MoaminResume.pdf" download class="btn">Resume</a>
         </div>
         <div class="contact-form">
-            <form id="contact-form">
-            <form name="submit-to-google-sheet">
+            <form id="contact-form" name="submit-to-google-sheet">
                 <input type="text" id="name" name="name" placeholder="Your Name" required>
                 <input type="email" id="email" name="email" placeholder="Your Email" required>
-                <textarea name="message" rows = "6" placeholder="Your Message"></textarea>
+                <textarea name="message" rows="6" placeholder="Your Message"></textarea>
                 <button type="submit" class="btn btn2">Submit</button>
+                <div class="success-message" id="success-message">Message has been sent!</div>
             </form>
         </div>
     </div>
 </section>
 
 <script>
-
+    // JavaScript for handling tabs
     var tablinks = document.getElementsByClassName("tab-links");
     var tabcontents = document.getElementsByClassName("tab-contents");
-    
-    function opentab(tabname){
-        for(tablink of tablinks){
+
+    function opentab(tabname) {
+        for (tablink of tablinks) {
             tablink.classList.remove("active-link");
         }
-        for(tabcontent of tabcontents){
+        for (tabcontent of tabcontents) {
             tabcontent.classList.remove("active-tab");
         }
         event.currentTarget.classList.add("active-link");
         document.getElementById(tabname).classList.add("active-tab");
     }
-
 </script>
-<script>
-    const scriptURL ='https://script.google.com/macros/s/AKfycbwlRQhds0iwBG-lEeH_vi5T6CuL-eza7ct7P6-4rAFdC67dTtKK8r4TUifiiPGvyCzn/exec'
-    const form = document.forms['submit-to-google-sheet']
-  
-    form.addEventListener('submit', e => {
-      e.preventDefault()
-      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-        .then(response => console.log('Success!', response))
-        .catch(error => console.error('Error!', error.message))
-    })
-  </script>
 
+<script>
+    // JavaScript for form submission
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbwlRQhds0iwBG-lEeH_vi5T6CuL-eza7ct7P6-4rAFdC67dTtKK8r4TUifiiPGvyCzn/exec';
+    const form = document.forms['submit-to-google-sheet'];
+    const successMessage = document.getElementById('success-message');
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+                .then(response => {
+                    console.log('Success!', response);
+                    // Clear form fields
+                    form.reset();
+                    // Show success message
+                    successMessage.style.display = 'block';
+                    // Hide the message after 3 seconds
+                    setTimeout(() => {
+                        successMessage.style.display = 'none';
+                    }, 1000);
+                })
+                .catch(error => {
+                    console.error('Error!', error.message);
+                });
+        });
+    </script>
 </body>
 </html>

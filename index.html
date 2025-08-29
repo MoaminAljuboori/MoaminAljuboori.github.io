@@ -1,197 +1,449 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Personal Portfolio</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://kit.fontawesome.com/cd66936424.js" crossorigin="anonymous"></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Moamin Al‑Juboori • Computer Engineering</title>
+  <meta name="description" content="Portfolio of Moamin Al‑Juboori — Computer Engineering student at the University of Guelph. Projects, coursework, experience, and contact." />
+  <meta name="theme-color" content="#0b0e13" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="canonical" href="https://moaminaljuboori.github.io/" />
+  <!-- Open Graph -->
+  <meta property="og:title" content="Moamin Al‑Juboori • Computer Engineering" />
+  <meta property="og:description" content="Final‑year Computer Engineering student. Selected projects in web, ML, and systems." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://moaminaljuboori.github.io/" />
+  <meta property="og:image" content="images/og-cover.png" />
+  
+  <script src="https://kit.fontawesome.com/cd66936424.js" crossorigin="anonymous"></script>
+  <style>
+    /* ===== RESET & TOKENS ===== */
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    :root{
+      --bg:#0b0e13;--surface:#121722;--muted:#96a0b5;--text:#edf2ff;--accent:#17e3ff;--accent-2:#5df3ff;--border:#223049;--radius:14px;--shadow:0 10px 30px rgba(0,0,0,.35)
+    }
+    body{font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.55}
+    img{max-width:100%;display:block}
+    .container{width:min(1120px,92%);margin-inline:auto}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+    /* ===== NAV ===== */
+    .site-header{position:sticky;top:0;z-index:100;background:linear-gradient(180deg,rgba(11,14,19,.9),rgba(11,14,19,.6));backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,.04)}
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+    .brand{display:flex;align-items:center;gap:.6rem;font-weight:700;text-decoration:none;color:var(--text);letter-spacing:.2px}
+    .logo{width:36px;height:36px;border-radius:8px;display:grid;place-items:center;background:#0e1624;border:1px solid var(--border);box-shadow:var(--shadow)}
+    .logo svg{width:22px;height:22px}
+    .accent{color:var(--accent)}
+    .nav-links{display:flex;align-items:center;gap:1.2rem;list-style:none}
+    .nav-links a{text-decoration:none;color:var(--text);padding:.5rem .6rem;border-radius:10px;border:1px solid transparent}
+    .nav-links a:hover{border-color:rgba(255,255,255,.08);background:rgba(255,255,255,.03)}
+    .nav-toggle{display:none;background:none;border:none;color:var(--text);font-size:1.25rem}
+
+    /* ===== HERO ===== */
+    .hero{padding:clamp(48px,6vw,96px) 0}
+    .hero-grid{display:grid;grid-template-columns:1.3fr .9fr;gap:clamp(24px,4vw,48px);align-items:center}
+    .eyebrow{color:var(--accent-2);font-weight:600;letter-spacing:.2px;text-transform:uppercase;font-size:.9rem}
+    .hero h1{font-size:clamp(2rem,4vw,3.2rem);line-height:1.1;margin-top:.5rem}
+    .lede{margin-top:14px;color:var(--muted);max-width:60ch}
+    .cta-row{display:flex;gap:.8rem;margin-top:18px;flex-wrap:wrap}
+    .btn{--p:.9rem 1.1rem;display:inline-flex;gap:.5rem;align-items:center;padding:var(--p);border-radius:12px;text-decoration:none;cursor:pointer;border:1px solid var(--border);background:rgba(255,255,255,.02);color:var(--text);transition:transform .12s ease,background .2s ease,border-color .2s ease}
+    .btn:hover{transform:translateY(-1px);border-color:rgba(255,255,255,.16)}
+    .btn-primary{background:linear-gradient(180deg,var(--accent),#00c9df);color:#00161a;border-color:transparent;font-weight:600}
+    .btn-primary:hover{filter:brightness(.98)}
+    .btn-ghost{background:rgba(255,255,255,.02)}
+    .btn-small{--p:.55rem .8rem;font-size:.92rem}
+    .quick-facts{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.6rem;margin-top:16px;color:var(--muted)}
+    .hero-portrait{justify-self:center}
+    .hero-portrait img{width:min(360px,90%);aspect-ratio:1/1;object-fit:cover;border-radius:24px;box-shadow:var(--shadow);border:1px solid var(--border)}
+
+    /* ===== SECTIONS ===== */
+    .section{padding:clamp(48px,6vw,84px) 0}
+    .section-header{margin-bottom:22px}
+    .section-header h2{font-size:clamp(1.6rem,3vw,2.2rem);letter-spacing:.3px}
+    .section-header p{color:var(--muted)}
+    .inline-link{color:var(--accent-2)}
+
+    /* ===== ABOUT ===== */
+    .about-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:28px;align-items:center}
+    .about-img{border-radius:18px;border:1px solid var(--border);box-shadow:var(--shadow)}
+    .highlights{display:flex;flex-wrap:wrap;gap:12px;margin-top:16px}
+    .highlight{background:var(--surface);border:1px solid var(--border);padding:10px 14px;border-radius:100px;color:var(--muted)}
+    .highlight span{color:var(--accent);font-weight:700;margin-right:6px}
+
+    /* ===== SKILLS ===== */
+    .tech-list{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+    .tech-list li{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:12px 14px;display:flex;align-items:center;gap:.6rem;color:var(--text)}
+    .tech-list i{opacity:.9}
+
+    /* ===== PROJECTS ===== */
+    .filter-bar{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 18px}
+    .filter-btn{--p:.4rem .8rem;border-radius:999px;border:1px solid var(--border);background:#0f1420;color:var(--text);cursor:pointer}
+    .filter-btn.active{background:var(--accent);color:#00161a;border-color:transparent}
+    .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+    .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;box-shadow:var(--shadow)}
+    .card-media{aspect-ratio:16/9;background:#0e121a;overflow:hidden}
+    .card-media img{width:100%;height:100%;object-fit:cover}
+    .card-body{padding:14px 16px}
+    .card-body h3{font-size:1.1rem;margin-bottom:6px}
+    .card-body p{color:var(--muted)}
+    .pill-list{list-style:none;display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+    .pill-list li{border:1px solid var(--border);background:rgba(255,255,255,.02);border-radius:999px;padding:6px 10px;font-size:.85rem;color:var(--text)}
+    .card-actions{display:flex;gap:8px;padding:0 16px 14px}
+
+    /* ===== COURSEWORK ===== */
+    .course-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+    .course{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:12px 14px;color:var(--muted)}
+
+    /* ===== TIMELINE ===== */
+    .timeline{list-style:none;border-left:2px solid var(--border);margin-left:8px;padding-left:18px;display:grid;gap:18px}
+    .timeline li{position:relative}
+    .timeline li::before{content:"";position:absolute;left:-10px;top:.3rem;width:10px;height:10px;border-radius:999px;background:var(--accent);box-shadow:0 0 0 4px rgba(23,227,255,.18)}
+    .timeline .time{color:var(--muted);font-size:.92rem;margin-bottom:4px}
+    .timeline .content h3{font-size:1.05rem;margin-bottom:6px}
+    .timeline .content p{color:var(--muted)}
+    .timeline .pill-list.small li{font-size:.78rem}
+
+    /* ===== CONTACT ===== */
+    .contact-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:20px;align-items:start}
+    .contact-list{list-style:none;display:grid;gap:10px}
+    .contact-list a{color:var(--text);text-decoration:none}
+    .contact-list i{color:var(--accent);margin-right:8px}
+    .contact-form{display:grid;gap:10px}
+    .contact-form input,.contact-form textarea{width:100%;background:#0f1420;color:var(--text);border:1px solid var(--border);border-radius:12px;padding:14px 16px}
+    .contact-form textarea{min-height:160px}
+    .success-message{display:none;margin-top:6px;color:#0ad67c}
+
+    /* ===== FOOTER ===== */
+    .site-footer{border-top:1px solid rgba(255,255,255,.06);background:#0a0e14;margin-top:40px}
+    .footer-inner{display:flex;align-items:center;justify-content:space-between;padding:18px 0}
+    .to-top{color:var(--text);text-decoration:none;border:1px solid var(--border);padding:.5rem .6rem;border-radius:10px}
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width:920px){.hero-grid,.about-grid,.contact-grid{grid-template-columns:1fr}.hero-portrait img{width:min(420px,100%)}}
+    @media (max-width:760px){
+      .nav-toggle{display:block}
+      .nav-links{position:absolute;right:4%;top:64px;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:10px;display:none;flex-direction:column;gap:4px;box-shadow:var(--shadow)}
+      .nav-links.open{display:flex}
+    }
+
+    /* ===== ACCESSIBILITY ===== */
+    :focus-visible{outline:2px dashed var(--accent);outline-offset:2px;border-radius:8px}
+    .reduce-motion *,.reduce-motion *::before,.reduce-motion *::after{transition:none!important;animation:none!important}
+  </style>
 </head>
 <body>
-<div id="header">
-    <div class="container">
-        <nav>
-            <img src="images/logo.png" class="logo">
-            <ul>
-                <li><a href="#header">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-        <div class="header-text">
-            <p>Computer Engineering student</p>
-                <h1>
-                    Hey, I'm Moamin Al-Juboori
-                </h1>
-        </div>
-        <div class= "header-image">
-            <img src="images/mainme.jpg" alt="Mainm Image">
-        </div>
-    </div>
-<!-- about -->
-</div>
-<div id="about">
-    <div class="container">
-        <div class="row">
-            <div class="about-col-1">
-                <img src="images/thasme.png" class="user">
-            </div>
-            <div class="about-col-2">
-                <h1 class = "sub-title"> About Me</h1>
-                <p>
-                I'm a student at the University of Guelph studying Computer Engineering currently in my junior year.
-                I am really passionate about software development as technology always caught my interest ever since I was a kid.
-                I have developed many skills during the past 3 years and I hope this website will give you an idea about myself!
-                </p>
+  <!-- ===== NAV ===== -->
+  <header class="site-header" id="top">
+    <nav class="nav container" aria-label="Primary">
+      <a class="brand" href="#top" aria-label="Go to top">
+        <span class="logo" aria-hidden="true">
+          <!-- simple monogram logo -->
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M4 18V6l4.5 6L13 6v12" stroke="#17e3ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 10h4M16 14h4" stroke="#5df3ff" stroke-width="2" stroke-linecap="round"/></svg>
+        </span>
+        <span>Moamin<span class="accent">.</span></span>
+      </a>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links"><span class="sr-only">Menu</span><i class="fa-solid fa-bars"></i></button>
+      <ul id="nav-links" class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#coursework">Coursework</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
 
-                <div class="tab-titles">
-                    <p class = "tab-links active-link" onclick="opentab('skills')">Skills</p>
-                    <p class = "tab-links" onclick="opentab('experience')">Experience</p>
-                    <p class = "tab-links" onclick="opentab('education')">Education</p>
-                </div>
-                <div class="tab-contents active-tab" id="skills">
-                    <ul>
-                        <li><span>Web Dev</span><br>Versed in front-end and back-end</li>
-                        <li><span>Software Dev</span><br>Proficient in Java, Python, and C</li>
-                        <li><span>Problem-Solving</span><br>Expert at troubleshooting code</li>
-                    </ul>
-                </div> <!-- Closing tag for skills tab-contents -->
-                <div class="tab-contents" id="experience">
-                    <ul>
-                        <li><span>No experience yet</span></li>
-                    </ul>
-                </div> <!-- Closing tag for experience tab-contents -->
-                <div class="tab-contents" id="education">
-                    <ul>
-                        <li><span>2021-2025</span><br>University of Guelph</li>
-                        <li><span>2017-2021</span><br>Stephen Lewis Secondary School</li>
-                    </ul>
-                </div> <!-- Closing tag for education tab-contents -->
-                
-            </div>
+  <!-- ===== HERO ===== -->
+  <section class="hero container" id="hero">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">Computer Engineering @ University of Guelph</p>
+        <h1>Hi, I’m <span class="accent">Moamin Al‑Juboori</span>.</h1>
+        <p class="lede">Final‑year student focused on building reliable software and clean user experiences. I like turning tough problems into elegant, shipped solutions.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="images/MoaminResume.pdf" download><i class="fa-solid fa-download"></i> Resume</a>
+          <a class="btn btn-ghost" href="#projects"><i class="fa-solid fa-code"></i> View Projects</a>
         </div>
+        <ul class="quick-facts" aria-label="Highlights">
+          <li><i class="fa-regular fa-circle-check"></i> Java, Python, C</li>
+          <li><i class="fa-regular fa-circle-check"></i> Full‑stack web (React/Node, REST)</li>
+          <li><i class="fa-regular fa-circle-check"></i> Interested in automotive & embedded systems</li>
+        </ul>
+      </div>
+      <div class="hero-portrait">
+        <img src="images/mainme.jpg" alt="Portrait of Moamin" />
+      </div>
     </div>
-</div>
+  </section>
 
-<!-- projects -->
-<div id="projects">
-    <div class="container">
-        <h1 class = "sub-title"> My Projects</h1>
-        <div class="projects-list">
-            <div class = "projects">
-                <img src = "images/Sudoku Solver.png">
-                <div class="layer">
-                    <h3>Sudoku Solver</h3>
-                    <p>A python program to generate and solve any Sudoku puzzle using backtracking algorithm</p>
-                    <a href="https://github.com/AmooniG/Sudoku-Solver" target = "_blank"><i class="fa-brands fa-github"></i></a>
-                </div>
-            </div>
-            <div class = "projects">
-                <img src = "images/Weather App.png">
-                <div class="layer">
-                    <h3>WeatherApp</h3>
-                    <p>A website that lets the user enter a city and will be given weather information relatively using OpenWeatherMap API</p>
-                    <a href="https://github.com/AmooniG/WeatherApp" target = "_blank"><i class="fa-brands fa-github"></i></a>
-                </div>
-            </div>
-            <div class = "projects">
-                <img src = "images/Finance.png">
-                <div class="layer">
-                    <h3>Finance Tracker</h3>
-                    <p>A Finance app to provide automated transaction tracking, budgeting, investments integrated with RESTful APIs and used machine learning to give financial insight </p>
-                    <a href="https://github.com/AmooniG/Finance-Tracker" target = "_blank" ><i class="fa-brands fa-github"></i></a>
-                </div>
-            </div>
+  <!-- ===== ABOUT ===== -->
+  <section id="about" class="section container">
+    <header class="section-header"><h2>About</h2></header>
+    <div class="about-grid">
+      <img class="about-img" src="images/thasme.png" alt="Moamin at work" />
+      <div>
+        <p>I’m a final‑semester Computer Engineering student at the University of Guelph. I enjoy building tools that make life easier — from small utilities to end‑to‑end web apps. Recently I’ve been exploring data‑driven features and software in modern vehicles.</p>
+        <div class="highlights">
+          <div class="highlight"><span>4+</span> years coding</div>
+          <div class="highlight"><span>10+</span> projects</div>
+          <div class="highlight"><span>3</span> core languages (Java, Python, C)</div>
         </div>
-        <a href="https://github.com/AmooniG" target = "_blank" class = "btn">See More</a>
+      </div>
     </div>
-</div>
-            <!-- <div>
-                <i class="fa-solid fa-pizza-slice"></i>
-                <h2>Project</h2>
-                <p>Description</p>
-                <a href="#">Learn more</a>
-            </div>
-            <div>
-                <i class="fa-solid fa-pizza-slice"></i>
-                <h2>Project</h2>
-                <p>Description</p>
-                <a href="#">Learn more</a>
-            </div>
-            <div>
-                <i class="fa-solid fa-pizza-slice"></i>
-                <h2>Project</h2>
-                <p>Description</p>
-                <a href="#">Learn more</a>
-            </div> -->
-<!-- Contact -->
-<section id="contact">
-    <div class="container contact-container">
-        <div class="contact-info">
-            <h2>Contact Me</h2>
-            <!-- Contact details -->
-            <p><i class="fas fa-envelope"></i> aljuboom@uoguelph.ca</p>
-            <p><i class="fas fa-phone"></i> +1 (647) 500-3796</p>
-            <!-- Social icons -->
-            <div class="social-icons">
-                <a href="https://www.linkedin.com/in/moamin-aljuboori/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-            </div>
-            <a href="images/MoaminResume.pdf" download class="btn">Resume</a>
-        </div>
-        <div class="contact-form">
-            <form id="contact-form" name="submit-to-google-sheet">
-                <input type="text" id="name" name="name" placeholder="Your Name" required>
-                <input type="email" id="email" name="email" placeholder="Your Email" required>
-                <textarea name="message" rows="6" placeholder="Your Message"></textarea>
-                <button type="submit" class="btn btn2">Submit</button>
-                <div class="success-message" id="success-message">Message has been sent!</div>
-            </form>
-        </div>
+  </section>
+
+  <!-- ===== SKILLS ===== -->
+  <section id="skills" class="section container">
+    <header class="section-header"><h2>Skills</h2><p>Tools I use and ship with.</p></header>
+    <ul class="tech-list">
+      <li><i class="fa-brands fa-python"></i> Python</li>
+      <li><i class="fa-brands fa-java"></i> Java</li>
+      <li><i class="fa-solid fa-c"></i> C</li>
+      <li><i class="fa-brands fa-js"></i> JavaScript/TypeScript</li>
+      <li><i class="fa-brands fa-react"></i> React / Next.js</li>
+      <li><i class="fa-brands fa-node"></i> Node.js / Express</li>
+      <li><i class="fa-solid fa-database"></i> MongoDB / SQL</li>
+      <li><i class="fa-solid fa-brain"></i> TensorFlow (basics)</li>
+      <li><i class="fa-solid fa-code-branch"></i> Git / GitHub</li>
+    </ul>
+  </section>
+
+  <!-- ===== PROJECTS ===== -->
+  <section id="projects" class="section container">
+    <header class="section-header">
+      <h2>Projects</h2>
+      <p>Selected work. More on <a class="inline-link" href="https://github.com/MoaminAljuboori" target="_blank" rel="noreferrer">GitHub</a>.</p>
+    </header>
+
+    <div class="filter-bar" role="tablist" aria-label="Project filters">
+      <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">All</button>
+      <button class="filter-btn" data-filter="web" role="tab" aria-selected="false">Web</button>
+      <button class="filter-btn" data-filter="ml" role="tab" aria-selected="false">ML</button>
+      <button class="filter-btn" data-filter="algorithms" role="tab" aria-selected="false">Algorithms</button>
     </div>
-</section>
 
-<script>
-    // JavaScript for handling tabs
-    var tablinks = document.getElementsByClassName("tab-links");
-    var tabcontents = document.getElementsByClassName("tab-contents");
+    <div class="cards" id="project-cards">
+      <!-- E‑Commerce Platform -->
+      <article class="card" data-category="web">
+        <figure class="card-media"><img src="images/ecommerce.png" alt="E‑Commerce Platform" /></figure>
+        <div class="card-body">
+          <h3>Full‑Stack E‑Commerce Platform</h3>
+          <p>React + Node.js store with Stripe payments, Firebase hosting, and role‑based authentication. Reduced API latency by ~40%.</p>
+          <ul class="pill-list"><li>React</li><li>Node.js</li><li>MongoDB</li><li>Stripe</li></ul>
+        </div>
+        <div class="card-actions">
+          <a class="btn btn-small" href="https://github.com/MoaminAljuboori" target="_blank" rel="noreferrer"><i class="fa-brands fa-github"></i> Code</a>
+        </div>
+      </article>
 
-    function opentab(tabname) {
-        for (tablink of tablinks) {
-            tablink.classList.remove("active-link");
-        }
-        for (tabcontent of tabcontents) {
-            tabcontent.classList.remove("active-tab");
-        }
-        event.currentTarget.classList.add("active-link");
-        document.getElementById(tabname).classList.add("active-tab");
+      <!-- AI Chatbot -->
+      <article class="card" data-category="web ml">
+        <figure class="card-media"><img src="images/chatbot.png" alt="AI Customer Support Chatbot" /></figure>
+        <div class="card-body">
+          <h3>AI Customer Support Chatbot</h3>
+          <p>Built with React, Node.js, and OpenAI API to answer customer queries and track orders. Cut resolution time by ~60%.</p>
+          <ul class="pill-list"><li>React</li><li>Node.js</li><li>OpenAI API</li></ul>
+        </div>
+        <div class="card-actions">
+          <a class="btn btn-small" href="https://github.com/MoaminAljuboori" target="_blank" rel="noreferrer"><i class="fa-brands fa-github"></i> Code</a>
+        </div>
+      </article>
+
+      <!-- Smart Inventory -->
+      <article class="card" data-category="ml web">
+        <figure class="card-media"><img src="images/inventory.png" alt="Smart Inventory Management" /></figure>
+        <div class="card-body">
+          <h3>Smart Inventory Management</h3>
+          <p>Python + Flask system using TensorFlow to forecast demand (~85% accuracy), send low‑stock alerts, and automate supplier notifications.</p>
+          <ul class="pill-list"><li>Python</li><li>Flask</li><li>MongoDB</li><li>TensorFlow</li></ul>
+        </div>
+        <div class="card-actions">
+          <a class="btn btn-small" href="https://github.com/MoaminAljuboori" target="_blank" rel="noreferrer"><i class="fa-brands fa-github"></i> Code</a>
+        </div>
+      </article>
+
+      <!-- Sudoku Solver -->
+      <article class="card" data-category="algorithms">
+        <figure class="card-media"><img src="images/Sudoku Solver.png" alt="Sudoku Solver screenshot" /></figure>
+        <div class="card-body">
+          <h3>Sudoku Solver</h3>
+          <p>Python app that generates & solves Sudoku using backtracking with optional visualization.</p>
+          <ul class="pill-list"><li>Python</li><li>Algorithms</li></ul>
+        </div>
+        <div class="card-actions">
+          <a class="btn btn-small" href="https://github.com/AmooniG/Sudoku-Solver" target="_blank" rel="noreferrer"><i class="fa-brands fa-github"></i> Code</a>
+        </div>
+      </article>
+
+      <!-- Weather App -->
+      <article class="card" data-category="web">
+        <figure class="card-media"><img src="images/Weather App.png" alt="Weather App screenshot" /></figure>
+        <div class="card-body">
+          <h3>WeatherApp</h3>
+          <p>City search with live data via OpenWeatherMap API; clean UI with error states and loading feedback.</p>
+          <ul class="pill-list"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
+        </div>
+        <div class="card-actions">
+          <a class="btn btn-small" href="https://github.com/AmooniG/WeatherApp" target="_blank" rel="noreferrer"><i class="fa-brands fa-github"></i> Code</a>
+        </div>
+      </article>
+
+      <!-- Finance Tracker -->
+      <article class="card" data-category="web ml">
+        <figure class="card-media"><img src="images/Finance.png" alt="Finance Tracker screenshot" /></figure>
+        <div class="card-body">
+          <h3>Finance Tracker</h3>
+          <p>Tracks transactions, budgets, and investments; integrates RESTful APIs and basic ML for spending insights.</p>
+          <ul class="pill-list"><li>Python</li><li>Flask</li><li>APIs</li></ul>
+        </div>
+        <div class="card-actions">
+          <a class="btn btn-small" href="https://github.com/AmooniG/Finance-Tracker" target="_blank" rel="noreferrer"><i class="fa-brands fa-github"></i> Code</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===== COURSEWORK ===== -->
+  <section id="coursework" class="section container">
+    <header class="section-header"><h2>Coursework</h2><p>Relevant upper‑year courses</p></header>
+    <div class="course-grid">
+      <div class="course">Discrete Structures in Computing (I, II)</div>
+      <div class="course">Data Structures & Algorithms</div>
+      <div class="course">Systems Analysis & Design</div>
+      <div class="course">Software Systems Dev & Integration</div>
+      <div class="course">VLSI Digital Design</div>
+      <div class="course">Advanced Computer Architecture</div>
+    </div>
+  </section>
+
+  <!-- ===== EXPERIENCE ===== -->
+  <section id="experience" class="section container">
+    <header class="section-header"><h2>Experience</h2><p>Internships, roles, and notable work</p></header>
+    <ol class="timeline">
+      <li>
+        <div class="time">Apr 2023 – Present</div>
+        <div class="content">
+          <h3>Technical Operations Coordinator — AJ Concord General Services Inc.</h3>
+          <p>Designed and integrated digital tracking tools (~25% efficiency gain), automated invoices with Excel, improved online presence, and coordinated logistics.</p>
+          <ul class="pill-list small"><li>Automation</li><li>Web Management</li><li>Excel</li></ul>
+        </div>
+      </li>
+      <li>
+        <div class="time">2021 – 2026</div>
+        <div class="content">
+          <h3>University of Guelph — B.Eng, Computer Engineering</h3>
+          <p>Focus on algorithms, software systems, VLSI, and architecture.</p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- ===== CONTACT ===== -->
+  <section id="contact" class="section container">
+    <header class="section-header"><h2>Contact</h2><p>Let’s build something.</p></header>
+    <div class="contact-grid">
+      <div>
+        <ul class="contact-list">
+          <li><i class="fa-solid fa-envelope"></i> <a href="mailto:moamin.aljuboori@gmail.com">moamin.aljuboori@gmail.com</a></li>
+          <li><i class="fa-solid fa-phone"></i> <a href="tel:+16475003796">+1 (647) 500‑3796</a></li>
+          <li><i class="fa-brands fa-linkedin"></i> <a href="https://www.linkedin.com/in/moamin-aljuboori/" target="_blank" rel="noreferrer">LinkedIn</a></li>
+          <li><i class="fa-brands fa-github"></i> <a href="https://github.com/MoaminAljuboori" target="_blank" rel="noreferrer">GitHub</a></li>
+          <li><i class="fa-solid fa-globe"></i> <a href="https://moaminaljuboori.github.io/" target="_blank" rel="noreferrer">Portfolio</a></li>
+        </ul>
+      </div>
+      <form id="contact-form" name="submit-to-google-sheet" class="contact-form" aria-label="Contact form">
+        <label class="sr-only" for="name">Your Name</label>
+        <input type="text" id="name" name="name" placeholder="Your name" required>
+        <label class="sr-only" for="email">Your Email</label>
+        <input type="email" id="email" name="email" placeholder="you@example.com" required>
+        <label class="sr-only" for="message">Your Message</label>
+        <textarea id="message" name="message" rows="6" placeholder="What can I help with?"></textarea>
+        <button type="submit" class="btn btn-primary">Send</button>
+        <div class="success-message" id="success-message" role="status" aria-live="polite">Message sent — thanks!</div>
+      </form>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© <span id="y"></span> Moamin Al‑Juboori. Built with clean HTML/CSS/JS.</p>
+      <a href="#top" class="to-top" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></a>
+    </div>
+  </footer>
+
+  <!-- JSON‑LD Schema for Person -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Moamin Al-Juboori",
+    "url": "https://moaminaljuboori.github.io/",
+    "email": "mailto:moamin.aljuboori@gmail.com",
+    "telephone": "+1-647-500-3796",
+    "sameAs": [
+      "https://www.linkedin.com/in/moamin-aljuboori/",
+      "https://github.com/MoaminAljuboori"
+    ],
+    "affiliation": {
+      "@type": "CollegeOrUniversity",
+      "name": "University of Guelph"
+    },
+    "hasOccupation": {
+      "@type": "Occupation",
+      "name": "Computer Engineering Student"
     }
-</script>
+  }
+  </script>
 
-<script>
-    // JavaScript for form submission
+  <!-- SCRIPTS -->
+  <script>
+    // Mobile nav toggle
+    const toggle = document.querySelector('.nav-toggle');
+    const links = document.getElementById('nav-links');
+    toggle.addEventListener('click', () => {
+      const e = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', String(!e));
+      links.classList.toggle('open');
+    });
+
+    // Project filtering
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('#project-cards .card');
+    filterButtons.forEach(btn => btn.addEventListener('click', () => {
+      filterButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.dataset.filter;
+      cards.forEach(c => {
+        if (f === 'all' || c.dataset.category.includes(f)) { c.style.display = ''; }
+        else { c.style.display = 'none'; }
+      });
+    }));
+
+    // Contact form to Google Apps Script
     const scriptURL = 'https://script.google.com/macros/s/AKfycbwlRQhds0iwBG-lEeH_vi5T6CuL-eza7ct7P6-4rAFdC67dTtKK8r4TUifiiPGvyCzn/exec';
     const form = document.forms['submit-to-google-sheet'];
     const successMessage = document.getElementById('success-message');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      try {
+        await fetch(scriptURL, { method: 'POST', body: new FormData(form) });
+        form.reset();
+        successMessage.style.display = 'block';
+        setTimeout(() => successMessage.style.display = 'none', 1800);
+      } catch (err) { console.error(err); }
+    });
 
-        form.addEventListener('submit', e => {
-            e.preventDefault();
-            fetch(scriptURL, { method: 'POST', body: new FormData(form) })
-                .then(response => {
-                    console.log('Success!', response);
-                    // Clear form fields
-                    form.reset();
-                    // Show success message
-                    successMessage.style.display = 'block';
-                    // Hide the message after 3 seconds
-                    setTimeout(() => {
-                        successMessage.style.display = 'none';
-                    }, 1000);
-                })
-                .catch(error => {
-                    console.error('Error!', error.message);
-                });
-        });
-    </script>
+    // Current year
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // Respect reduced motion
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.documentElement.classList.add('reduce-motion');
+    }
+  </script>
 </body>
 </html>

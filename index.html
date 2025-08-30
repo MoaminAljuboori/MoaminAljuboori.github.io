@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://kit.fontawesome.com/cd66936424.js" crossorigin="anonymous"></script>
+
   <style>
     /* ===== RESET & TOKENS ===== */
     *{box-sizing:border-box;margin:0;padding:0}
@@ -42,18 +43,18 @@
     /* ===== LAYOUT ===== */
     .page{display:none;opacity:0;transform:translateY(16px);transition:opacity .35s ease,transform .35s ease}
     .page.active{display:block;opacity:1;transform:none}
-    .section{padding:clamp(48px,6vw,84px) 0}
+    .section{padding:clamp(40px,5vw,72px) 0}
     .section-header{margin-bottom:22px}
     .section-header h1,.section-header h2{font-size:clamp(1.6rem,3vw,2.2rem);letter-spacing:.3px}
     .section-header p{color:var(--muted)}
     .inline-link{color:var(--accent-2)}
 
     /* ===== HERO (HOME) ===== */
-    .hero{padding:clamp(48px,6vw,96px) 0}
+    .hero{padding:clamp(36px,5vw,84px) 0}
     .hero-grid{display:grid;grid-template-columns:1.3fr .9fr;gap:clamp(24px,4vw,48px);align-items:center}
     .eyebrow{color:var(--accent-2);font-weight:600;letter-spacing:.2px;text-transform:uppercase;font-size:.9rem}
     .hero h1{font-size:clamp(2rem,4vw,3.2rem);line-height:1.1;margin-top:.5rem}
-    .lede{margin-top:14px;color:var(--muted);max-width:60ch}
+    .lede{margin-top:12px;color:var(--muted);max-width:60ch}
     .cta-row{display:flex;gap:.8rem;margin-top:18px;flex-wrap:wrap}
     .btn{--p:.9rem 1.1rem;display:inline-flex;gap:.5rem;align-items:center;padding:var(--p);border-radius:12px;text-decoration:none;cursor:pointer;border:1px solid var(--border);background:rgba(255,255,255,.02);color:var(--text);transition:transform .12s ease,background .2s ease,border-color .2s ease}
     .btn:hover{transform:translateY(-1px);border-color:rgba(255,255,255,.16)}
@@ -84,27 +85,43 @@
 
     /* ===== SKILLS PAGE ===== */
     .tech-list{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
-    .tech{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 16px;display:flex;align-items:center;gap:.6rem}
-    .tech i{opacity:.9}
+    .tech{position:relative;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 16px;display:flex;align-items:center;gap:.6rem;cursor:default}
+    .tech i{opacity:.95}
+    .tech .tip{
+      position:absolute;left:50%;bottom:calc(100% + 10px);transform:translateX(-50%) translateY(6px);
+      background:#0c1422;color:#d9eeff;border:1px solid var(--border);border-radius:12px;
+      padding:12px 14px;box-shadow:var(--shadow);min-width:240px;max-width:320px;line-height:1.35;
+      opacity:0;pointer-events:none;transition:opacity .18s ease, transform .18s ease;z-index:5
+    }
+    :root.light .tech .tip{background:#fff;color:#0b1220}
+    .tech:hover .tip,.tech:focus-within .tip{opacity:1;transform:translateX(-50%) translateY(0)}
+    .tip h4{font-size:.95rem;margin-bottom:6px}
+    .tip p{color:var(--muted);font-size:.9rem;margin-bottom:8px}
+    .tip .mini-icons{display:flex;gap:8px;align-items:center;margin-bottom:8px}
+    .tip .mini-icons i{opacity:1}
+    .tip a{display:inline-flex;gap:6px;align-items:center;text-decoration:none;border:1px solid var(--border);padding:.35rem .55rem;border-radius:10px;color:var(--text)}
+    .tip a:hover{background:rgba(255,255,255,.06)}
+    /* remove any legacy tooltip approach */
+    .tech[data-desc]::after{content:none !important}
 
     /* ===== PROJECTS PAGE ===== */
     .filter-bar{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 18px}
     .filter-btn{--p:.4rem .8rem;border-radius:999px;border:1px solid var(--border);background:#0f1420;color:var(--text);cursor:pointer}
     :root.light .filter-btn{background:#fff}
     .filter-btn.active{background:var(--accent);color:#00161a;border-color:transparent}
-    .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
-    .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;box-shadow:var(--shadow)}
+    .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;align-items:stretch}
+    .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;box-shadow:var(--shadow);min-height:100%}
     .card-media{aspect-ratio:16/9;background:#0e121a;overflow:hidden}
-    .card-media img{width:100%;height:100%;object-fit:cover}
-    .card-body{padding:14px 16px}
-    .card-body h3{font-size:1.1rem;margin-bottom:6px}
+    .card-media img{width:100%;height:100%;object-fit:cover;display:block}
+    .card-body{display:flex;flex-direction:column;padding:14px 16px;gap:8px;flex:1}
+    .card-body h3{font-size:1.1rem;line-height:1.25}
     .card-body p{color:var(--muted)}
-    .pill-list{list-style:none;display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+    .pill-list{list-style:none;display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}
     .pill-list li{border:1px solid var(--border);background:rgba(255,255,255,.02);border-radius:999px;padding:6px 10px;font-size:.85rem;color:var(--text)}
-    .card-actions{display:flex;gap:8px;padding:0 16px 14px}
+    .card-actions{margin-top:auto;display:flex;gap:8px;padding:0 16px 14px}
 
     /* ===== COURSEWORK PAGE ===== */
-    .course-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+    .course-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
     .course{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 16px;color:var(--muted)}
 
     /* ===== EXPERIENCE PAGE ===== */
@@ -229,31 +246,136 @@
     <!-- SKILLS -->
     <section id="page-skills" class="page">
       <div class="container section">
-        <header class="section-header"><h1>Skills</h1><p>Tools I use and ship with.</p></header>
+        <header class="section-header"><h1>Skills</h1><p>Tools I use and ship with. Hover any skill for details.</p></header>
         <ul class="tech-list reveal">
-          <li class="tech"><i class="fa-brands fa-python"></i> Python</li>
-          <li class="tech"><i class="fa-brands fa-java"></i> Java</li>
-          <li class="tech"><i class="fa-solid fa-c"></i> C</li>
-          <li class="tech"><i class="fa-brands fa-js"></i> JavaScript / TypeScript</li>
-          <li class="tech"><i class="fa-brands fa-react"></i> React / Next.js</li>
-          <li class="tech"><i class="fa-brands fa-node"></i> Node.js / Express</li>
-          <li class="tech"><i class="fa-solid fa-database"></i> MongoDB / SQL</li>
-          <li class="tech"><i class="fa-solid fa-brain"></i> TensorFlow (basics)</li>
-          <li class="tech"><i class="fa-solid fa-code-branch"></i> Git / GitHub</li>
+          <li class="tech" tabindex="0">
+            <i class="fa-brands fa-python"></i> Python
+            <div class="tip" role="tooltip">
+              <h4>Python</h4>
+              <p>Clean scripting, REST APIs, data tasks, and automations.</p>
+              <div class="mini-icons"><i class="fa-solid fa-code"></i><i class="fa-solid fa-gears"></i><i class="fa-solid fa-database"></i></div>
+              <a href="https://docs.python.org/3/" target="_blank" rel="noreferrer"><i class="fa-solid fa-book-open"></i> Docs</a>
+            </div>
+          </li>
+          <li class="tech" tabindex="0">
+            <i class="fa-brands fa-java"></i> Java
+            <div class="tip" role="tooltip">
+              <h4>Java</h4>
+              <p>OOP patterns, collections, CLI tools, and testing basics.</p>
+              <div class="mini-icons"><i class="fa-solid fa-cubes"></i><i class="fa-solid fa-diagram-project"></i></div>
+              <a href="https://docs.oracle.com/javase/specs/" target="_blank" rel="noreferrer"><i class="fa-solid fa-book-open"></i> Docs</a>
+            </div>
+          </li>
+          <li class="tech" tabindex="0">
+            <i class="fa-solid fa-c"></i> C
+            <div class="tip" role="tooltip">
+              <h4>C</h4>
+              <p>Pointers, memory, and embedded-flavored coursework.</p>
+              <div class="mini-icons"><i class="fa-solid fa-microchip"></i><i class="fa-solid fa-memory"></i></div>
+              <a href="https://en.cppreference.com/w/c" target="_blank" rel="noreferrer"><i class="fa-solid fa-book-open"></i> Reference</a>
+            </div>
+          </li>
+          <li class="tech" tabindex="0">
+            <i class="fa-brands fa-js"></i> JavaScript / TypeScript
+            <div class="tip" role="tooltip">
+              <h4>JS / TS</h4>
+              <p>Typed UIs & APIs, modules, async/await, and tooling.</p>
+              <div class="mini-icons"><i class="fa-solid fa-bolt"></i><i class="fa-solid fa-file-code"></i></div>
+              <a href="https://www.typescriptlang.org/docs/" target="_blank" rel="noreferrer"><i class="fa-solid fa-book-open"></i> TS Docs</a>
+            </div>
+          </li>
+          <li class="tech" tabindex="0">
+            <i class="fa-brands fa-react"></i> React / Next.js
+            <div class="tip" role="tooltip">
+              <h4>React / Next</h4>
+              <p>Hooks, component patterns, routing, and bundling.</p>
+              <div class="mini-icons"><i class="fa-solid fa-layer-group"></i><i class="fa-solid fa-route"></i></div>
+              <a href="https://react.dev/learn" target="_blank" rel="noreferrer"><i class="fa-solid fa-book-open"></i> React Docs</a>
+            </div>
+          </li>
+          <li class="tech" tabindex="0">
+            <i class="fa-brands fa-node"></i> Node.js / Express
+            <div class="tip" role="tooltip">
+              <h4>Node / Express</h4>
+              <p>RESTful APIs, middleware, auth, performance tuning.</p>
+              <div class="mini-icons"><i class="fa-solid fa-server"></i><i class="fa-solid fa-key"></i></div>
+              <a href="https://expressjs.com/" target="_blank" rel="noreferrer"><i class="fa-solid fa-book-open"></i> Express Docs</a>
+            </div>
+          </li>
+          <li class="tech" tabindex="0">
+            <i class="fa-solid fa-database"></i> MongoDB / SQL
+            <div class="tip" role="tooltip">
+              <h4>Databases</h4>
+              <p>Schema design, indexes, joins, and query optimization.</p>
+              <div class="mini-icons"><i class="fa-solid fa-magnifying-glass-chart"></i><i class="fa-solid fa-table"></i></div>
+              <a href="https://www.mongodb.com/docs/" target="_blank" rel="noreferrer"><i class="fa-solid fa-book-open"></i> MongoDB Docs</a>
+            </div>
+          </li>
+          <li class="tech" tabindex="0">
+            <i class="fa-solid fa-brain"></i> TensorFlow (basics)
+            <div class="tip" role="tooltip">
+              <h4>TensorFlow</h4>
+              <p>Training fundamentals and small-app inference.</p>
+              <div class="mini-icons"><i class="fa-solid fa-wave-square"></i><i class="fa-solid fa-chart-line"></i></div>
+              <a href="https://www.tensorflow.org/learn" target="_blank" rel="noreferrer"><i class="fa-solid fa-book-open"></i> Learn</a>
+            </div>
+          </li>
+          <li class="tech" tabindex="0">
+            <i class="fa-solid fa-code-branch"></i> Git / GitHub
+            <div class="tip" role="tooltip">
+              <h4>Git / GitHub</h4>
+              <p>Branching strategies, clean PRs, and release hygiene.</p>
+              <div class="mini-icons"><i class="fa-brands fa-git-alt"></i><i class="fa-brands fa-github"></i></div>
+              <a href="https://git-scm.com/docs" target="_blank" rel="noreferrer"><i class="fa-solid fa-book-open"></i> Git Docs</a>
+            </div>
+          </li>
+          <li class="tech" tabindex="0">
+            <i class="fa-solid fa-shield-halved"></i> App Security (basics)
+            <div class="tip" role="tooltip">
+              <h4>Security</h4>
+              <p>API auth, rate limiting, input validation, and secrets.</p>
+              <div class="mini-icons"><i class="fa-solid fa-user-shield"></i><i class="fa-solid fa-lock"></i></div>
+              <a href="https://cheatsheetseries.owasp.org/" target="_blank" rel="noreferrer"><i class="fa-solid fa-book-open"></i> OWASP</a>
+            </div>
+          </li>
+          <li class="tech" tabindex="0">
+            <i class="fa-brands fa-docker"></i> Docker (basics)
+            <div class="tip" role="tooltip">
+              <h4>Docker</h4>
+              <p>Dev containers for reproducible local environments.</p>
+              <div class="mini-icons"><i class="fa-solid fa-box-archive"></i><i class="fa-solid fa-layer-group"></i></div>
+              <a href="https://docs.docker.com/get-started/" target="_blank" rel="noreferrer"><i class="fa-solid fa-book-open"></i> Get Started</a>
+            </div>
+          </li>
+          <li class="tech" tabindex="0">
+            <i class="fa-solid fa-universal-access"></i> Accessible UI
+            <div class="tip" role="tooltip">
+              <h4>Accessible UI</h4>
+              <p>Keyboard-first flows and readable contrast.</p>
+              <div class="mini-icons"><i class="fa-solid fa-eye"></i><i class="fa-solid fa-keyboard"></i></div>
+              <a href="https://developer.mozilla.org/en-US/docs/Learn/Accessibility" target="_blank" rel="noreferrer"><i class="fa-solid fa-book-open"></i> MDN</a>
+            </div>
+          </li>
         </ul>
       </div>
     </section>
-
     <!-- PROJECTS -->
     <section id="page-projects" class="page">
       <div class="container section">
-        <header class="section-header"><h1>Projects</h1><p>Selected work. More on <a class="inline-link" href="https://github.com/MoaminAljuboori" target="_blank" rel="noreferrer">GitHub</a>.</p></header>
+        <header class="section-header">
+          <h1>Projects</h1>
+          <p>Selected work. More on
+            <a class="inline-link" href="https://github.com/MoaminAljuboori" target="_blank" rel="noreferrer">GitHub</a>.
+          </p>
+        </header>
+
         <div class="filter-bar" role="tablist">
           <button class="filter-btn active" data-filter="all">All</button>
           <button class="filter-btn" data-filter="web">Web</button>
           <button class="filter-btn" data-filter="ml">ML</button>
           <button class="filter-btn" data-filter="algorithms">Algorithms</button>
         </div>
+
         <section class="cards" id="project-cards">
           <article class="card reveal" data-category="web">
             <figure class="card-media"><img src="images/ecommerce.png" alt="E-Commerce Platform" /></figure>
@@ -262,17 +384,21 @@
               <p>React + Node.js store with Stripe, Firebase hosting, and role-based auth. ~40% API latency reduction via query tuning.</p>
               <ul class="pill-list"><li>React</li><li>Node.js</li><li>MongoDB</li><li>Stripe</li></ul>
             </div>
-            <div class="card-actions"><a class="btn btn-small" href="https://github.com/MoaminAljuboori" target="_blank"><i class="fa-brands fa-github"></i> Code</a></div>
+            <div class="card-actions">
+              <a class="btn btn-small" href="https://github.com/MoaminAljuboori" target="_blank"><i class="fa-brands fa-github"></i> Code</a>
+            </div>
           </article>
 
           <article class="card reveal" data-category="web ml">
             <figure class="card-media"><img src="images/chatbot.png" alt="AI Customer Support Chatbot" /></figure>
             <div class="card-body">
               <h3>AI Customer Support Chatbot</h3>
-              <p>React, Node.js, and OpenAI API for customer Q&A and order tracking. Cut resolution time by ~60%.</p>
+              <p>React, Node.js, and OpenAI API for customer Q&amp;A and order tracking. Cut resolution time by ~60%.</p>
               <ul class="pill-list"><li>React</li><li>Node.js</li><li>OpenAI API</li></ul>
             </div>
-            <div class="card-actions"><a class="btn btn-small" href="https://github.com/MoaminAljuboori" target="_blank"><i class="fa-brands fa-github"></i> Code</a></div>
+            <div class="card-actions">
+              <a class="btn btn-small" href="https://github.com/MoaminAljuboori" target="_blank"><i class="fa-brands fa-github"></i> Code</a>
+            </div>
           </article>
 
           <article class="card reveal" data-category="ml web">
@@ -282,17 +408,21 @@
               <p>Python + Flask + TensorFlow demand forecasting (~85% accuracy), low-stock alerts, and supplier notifications.</p>
               <ul class="pill-list"><li>Python</li><li>Flask</li><li>MongoDB</li><li>TensorFlow</li></ul>
             </div>
-            <div class="card-actions"><a class="btn btn-small" href="https://github.com/MoaminAljuboori" target="_blank"><i class="fa-brands fa-github"></i> Code</a></div>
+            <div class="card-actions">
+              <a class="btn btn-small" href="https://github.com/MoaminAljuboori" target="_blank"><i class="fa-brands fa-github"></i> Code</a>
+            </div>
           </article>
 
           <article class="card reveal" data-category="algorithms">
             <figure class="card-media"><img src="images/Sudoku Solver.png" alt="Sudoku Solver" /></figure>
             <div class="card-body">
               <h3>Sudoku Solver</h3>
-              <p>Python app that generates & solves Sudoku using backtracking with optional visualization.</p>
+              <p>Python app that generates &amp; solves Sudoku using backtracking with optional visualization.</p>
               <ul class="pill-list"><li>Python</li><li>Algorithms</li></ul>
             </div>
-            <div class="card-actions"><a class="btn btn-small" href="https://github.com/AmooniG/Sudoku-Solver" target="_blank"><i class="fa-brands fa-github"></i> Code</a></div>
+            <div class="card-actions">
+              <a class="btn btn-small" href="https://github.com/AmooniG/Sudoku-Solver" target="_blank"><i class="fa-brands fa-github"></i> Code</a>
+            </div>
           </article>
 
           <article class="card reveal" data-category="web">
@@ -302,7 +432,9 @@
               <p>City search with OpenWeatherMap API; clean UI, error states, and loading feedback.</p>
               <ul class="pill-list"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
             </div>
-            <div class="card-actions"><a class="btn btn-small" href="https://github.com/AmooniG/WeatherApp" target="_blank"><i class="fa-brands fa-github"></i> Code</a></div>
+            <div class="card-actions">
+              <a class="btn btn-small" href="https://github.com/AmooniG/WeatherApp" target="_blank"><i class="fa-brands fa-github"></i> Code</a>
+            </div>
           </article>
 
           <article class="card reveal" data-category="web ml">
@@ -312,24 +444,71 @@
               <p>Tracks transactions, budgets, and investments; integrates RESTful APIs and basic ML for spending insights.</p>
               <ul class="pill-list"><li>Python</li><li>Flask</li><li>APIs</li></ul>
             </div>
-            <div class="card-actions"><a class="btn btn-small" href="https://github.com/AmooniG/Finance-Tracker" target="_blank"><i class="fa-brands fa-github"></i> Code</a></div>
+            <div class="card-actions">
+              <a class="btn btn-small" href="https://github.com/AmooniG/Finance-Tracker" target="_blank"><i class="fa-brands fa-github"></i> Code</a>
+            </div>
           </article>
         </section>
       </div>
     </section>
 
-    <!-- COURSEWORK -->
+    <!-- COURSEWORK (complete list) -->
     <section id="page-coursework" class="page">
       <div class="container section">
-        <header class="section-header"><h1>Coursework</h1><p>Relevant upper-year courses</p></header>
+        <header class="section-header">
+          <h1>Coursework</h1>
+          <p>Completed & registered courses.</p>
+        </header>
+
         <div class="course-grid reveal">
-          <div class="course">Discrete Structures in Computing I</div>
-          <div class="course">Discrete Structures in Computing II</div>
-          <div class="course">Data Structures & Algorithms</div>
-          <div class="course">Systems Analysis & Design</div>
-          <div class="course">Software Systems Dev & Integration</div>
-          <div class="course">VLSI Digital Design</div>
-          <div class="course">Advanced Computer Architecture</div>
+          <!-- Core math/science -->
+          <div class="course">MATH*1200 — Calculus I</div>
+          <div class="course">MATH*1210 — Calculus II (Transfer Equivalency)</div>
+          <div class="course">MATH*2270 — Applied Differential Equations</div>
+          <div class="course">MATH*2130 — Numerical Methods</div>
+          <div class="course">STAT*2120 — Probability & Statistics for Engineers</div>
+          <div class="course">CHEM*1040 — General Chemistry I</div>
+          <div class="course">PHYS*1130 — Intro Physics with Applications</div>
+          <div class="course">PHYS*1010 — Intro Electricity & Magnetism</div>
+
+          <!-- Engineering foundations -->
+          <div class="course">ENGG*1500 — Engineering Analysis</div>
+          <div class="course">ENGG*1100 — Engineering & Design I</div>
+          <div class="course">ENGG*2100 — Engineering & Design II</div>
+          <div class="course">ENGG*3100 — Engineering & Design III</div>
+          <div class="course">ENGG*4000 — Proposal Engineering Design IV</div>
+
+          <!-- Computing + EE fundamentals -->
+          <div class="course">ENGG*1210 — Engineering Mechanics I</div>
+          <div class="course">ENGG*2400 — Engineering Systems Analysis</div>
+          <div class="course">ENGG*2410 — Digital Systems Design</div>
+          <div class="course">ENGG*2450 — Electric Circuits</div>
+          <div class="course">ENGG*3380 — Computer Organization & Design</div>
+          <div class="course">ENGG*3390 — Signal Processing</div>
+          <div class="course">ENGG*3410 — Systems & Control Theory</div>
+          <div class="course">ENGG*3210 — Communication Systems</div>
+          <div class="course">ENGG*3050 — Embedded Reconfigurable Computer Systems</div>
+          <div class="course">ENGG*3640 — Microcomputer Interfacing</div>
+          <div class="course">ENGG*4450 — Large-Scale Software Architecture Engineering</div>
+          <div class="course">ENGG*4550 — VLSI Digital Design</div>
+          <div class="course">ENGG*4540 — Advanced Computer Architecture</div>
+          <div class="course">ENGG*4170 — Computer Engineering Design IV (Registered)</div>
+          <div class="course">ENGG*4420 — Real-Time Systems Design (Registered)</div>
+          <div class="course">ENGG*4460 — Robotic Systems</div>
+
+          <!-- CS courses -->
+          <div class="course">CIS*1410 — Intro Programming for Engineers (Transfer Equivalency)</div>
+          <div class="course">CIS*1420 — Object-Oriented Programming (Transfer Equivalency)</div>
+          <div class="course">CIS*2520 — Data Structures</div>
+          <div class="course">CIS*2910 — Discrete Structures in Computing II</div>
+          <div class="course">CIS*3110 — Operating Systems</div>
+          <div class="course">CIS*3490 — Analysis & Design of Computer Algorithms</div>
+          <div class="course">CIS*2750 — Software System Development & Integration</div>
+          <div class="course">CIS*3750 — Systems Analysis & Design in Applications (Registered)</div>
+
+          <!-- Other -->
+          <div class="course">HIST*1250 — Science & Technology in a Global Context</div>
+          <div class="course">ENGG*3240 — Engineering Economics</div>
         </div>
       </div>
     </section>
@@ -337,7 +516,10 @@
     <!-- EXPERIENCE -->
     <section id="page-experience" class="page">
       <div class="container section">
-        <header class="section-header"><h1>Experience</h1><p>Roles, education, and highlights.</p></header>
+        <header class="section-header">
+          <h1>Experience</h1>
+          <p>Roles, education, and highlights.</p>
+        </header>
 
         <section class="about-grid reveal" style="margin-bottom:16px">
           <img class="about-img" src="images/moamin-alt.jpg" alt="Working shot" />
@@ -357,7 +539,7 @@
             <div class="time">Apr 2023 – Present</div>
             <div class="content">
               <h3>Technical Operations Coordinator — AJ Concord General Services Inc.</h3>
-              <p>Designed & integrated digital tracking/scheduling/cost tools (~25% efficiency), automated invoices with Excel, maintained web presence, and coordinated logistics end-to-end.</p>
+              <p>Designed &amp; integrated digital tracking/scheduling/cost tools (~25% efficiency), automated invoices with Excel, maintained web presence, and coordinated logistics end-to-end.</p>
               <ul class="pill-list small"><li>Automation</li><li>Web Management</li><li>Excel</li></ul>
             </div>
           </li>
@@ -365,7 +547,7 @@
             <div class="time">2021 – 2026</div>
             <div class="content">
               <h3>University of Guelph — B.Eng, Computer Engineering</h3>
-              <p>Relevant coursework: Discrete Structures (I, II), Data Structures & Algorithms, Systems Analysis & Design, Software Systems Development & Integration, VLSI Digital Design, Advanced Computer Architecture.</p>
+              <p>See the Coursework page for the full list of courses completed and registered.</p>
             </div>
           </li>
         </ol>
@@ -405,13 +587,13 @@
       modeToggle.setAttribute('aria-label', light ? 'Switch to dark mode' : 'Switch to light mode');
     }
     updateModeIcon();
-    modeToggle.addEventListener('click', () => {
+    modeToggle?.addEventListener('click', () => {
       root.classList.toggle('light');
       localStorage.setItem('theme', root.classList.contains('light') ? 'light' : 'dark');
       updateModeIcon();
     });
 
-    // --- Simple hash router (#/, #/skills, #/projects, #/coursework, #/experience)
+    // --- Simple hash router
     const routes = {
       '/': 'page-home',
       '/skills': 'page-skills',
@@ -436,12 +618,14 @@
       // kick off reveal animations for visible page
       document.querySelectorAll('#'+pageId+' .reveal').forEach(el => {
         el.classList.remove('visible'); // reset
-        observer.observe(el);
       });
+      setTimeout(() => {
+        document.querySelectorAll('#'+pageId+' .reveal').forEach(el => observer.observe(el));
+      }, 0);
 
       // Close mobile menu after nav
       if (navLinks) navLinks.classList.remove('open');
-      window.scrollTo({ top: 0, behavior: 'instant' in window ? 'instant' : 'auto' });
+      window.scrollTo({ top: 0, behavior: 'auto' });
     }
     window.addEventListener('hashchange', render);
     window.addEventListener('load', render);
@@ -471,8 +655,8 @@
         c.style.display = (cat === 'all' || c.dataset.category.includes(cat)) ? '' : 'none';
       });
     };
-    document.querySelectorAll('#page-projects .filter-btn').forEach(b=>{
-      b.addEventListener('click', ()=>filter(b.dataset.filter));
+    document.querySelectorAll('#page-projects .filter-btn').forEach(b => {
+      b.addEventListener('click', () => filter(b.dataset.filter));
     });
 
     // --- Contact form (Google Apps Script endpoint)

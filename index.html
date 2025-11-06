@@ -488,18 +488,25 @@
     /* ===== PROJECTS PAGE ===== */
     .filter-bar {
       display: flex;
-      gap: 8px;
+      gap: 10px;
       flex-wrap: wrap;
       margin: 10px 0 18px
     }
 
     .filter-btn {
-      --p: .4rem .8rem;
+      --p: .42rem .85rem;
       border-radius: 999px;
       border: 1px solid var(--border);
-      background: #0f1420;
+      background: rgba(255, 255, 255, .02);
       color: var(--text);
-      cursor: pointer
+      cursor: pointer;
+      font-weight: 600;
+      letter-spacing: .2px;
+    }
+
+    .filter-btn:hover {
+      border-color: rgba(255, 255, 255, .16);
+      background: rgba(255, 255, 255, .04)
     }
 
     :root.light .filter-btn {
@@ -509,8 +516,10 @@
     .filter-btn.active {
       background: var(--accent);
       color: #00161a;
-      border-color: transparent
+      border-color: transparent;
+      box-shadow: 0 0 0 4px rgba(23, 227, 255, .18);
     }
+
 
     .cards {
       display: grid;
@@ -834,9 +843,11 @@
         <div class="hero-grid">
           <div class="hero-copy">
             <p class="eyebrow">Computer Engineering @ University of Guelph</p>
-            <h1>Hi, I’m <span class="accent">Moamin Al-Juboori</span>.</h1>
-            <p class="lede">Final-year CE student focused on reliable software and clean user experiences. I like
-              turning tough problems into elegant, shipped solutions.</p>
+            <h1>Hi, I'm <span class="accent">Moamin Al-Juboori</span>.</h1>
+            <p class="lede">Fresh Computer Engineering graduate passionate about building reliable, user-friendly
+              systems.
+              I love solving complex problems with clean, practical code. I'm also actively looking for opportunities to
+              grow as a software/hardware engineer.</p>
             <div class="cta-row">
               <a class="btn btn-primary" href="images/MoaminResume.pdf" download><i class="fa-solid fa-download"></i>
                 Resume</a>
@@ -858,12 +869,14 @@
         <div class="about-grid">
           <img class="about-img" src="images/moamin-about.jpg" alt="Moamin candid" />
           <div>
-            <p>I enjoy building tools that make life easier — from small utilities to end-to-end web apps. Recently I’ve
-              been exploring data-driven features and software in modern vehicles.</p>
+            <p>I'm a hands-on engineer who enjoys turning ideas into tools that genuinely make life easier
+              whether that's a clean UI, a working prototype, or a process that saves time. I've built full-stack
+              apps, worked on embedded systems, and I'm excited to explore more.</p>
             <div class="highlights">
               <div class="highlight"><span>4+</span> years coding</div>
               <div class="highlight"><span>10+</span> projects</div>
-              <div class="highlight"><span>3</span> core languages (Java, Python, C)</div>
+              <div class="highlight"><span>6+</span> core languages (Java, Python, C, C++, JavaScript, SQL)</div>
+
             </div>
           </div>
         </div>
@@ -872,7 +885,7 @@
       <section id="contact" class="section container reveal">
         <header class="section-header">
           <h2>Contact</h2>
-          <p>Let’s build something.</p>
+          <p>Let's build something.</p>
         </header>
         <div class="contact-grid">
           <div>
@@ -898,8 +911,6 @@
             </div>
           </form>
         </div>
-        <small style="display:block;margin-top:8px;color:var(--muted)">Form endpoint:
-          <code>https://script.google.com/macros/s/AKfycbwlRQhds0iwBG-lEeH_vi5T6CuL-eza7ct7P6-4rAFdC67dTtKK8r4TUifiiPGvyCzn/exec</code></small>
       </section>
     </section>
 
@@ -910,6 +921,51 @@
           <h1>Skills</h1>
           <p>Tools I use and ship with. Hover any skill for details.</p>
         </header>
+        <li class="tech" tabindex="0">
+          <i class="fa-solid fa-code"></i> C++
+          <div class="tip" role="tooltip">
+            <h4>C++</h4>
+            <p>STL, RAII, and performance-minded data structures.</p>
+            <div class="mini-icons"><i class="fa-solid fa-bolt"></i><i class="fa-solid fa-cubes"></i></div>
+            <a href="https://en.cppreference.com/w/" target="_blank" rel="noreferrer"><i
+                class="fa-solid fa-book-open"></i> Reference</a>
+          </div>
+        </li>
+
+        <li class="tech" tabindex="0">
+          <i class="fa-solid fa-file-code"></i> HTML / CSS
+          <div class="tip" role="tooltip">
+            <h4>HTML / CSS</h4>
+            <p>Responsive layouts, accessibility, animations, theming.</p>
+            <div class="mini-icons"><i class="fa-solid fa-universal-access"></i><i
+                class="fa-solid fa-wand-magic-sparkles"></i></div>
+            <a href="https://developer.mozilla.org/en-US/docs/Learn" target="_blank" rel="noreferrer"><i
+                class="fa-solid fa-book-open"></i> MDN</a>
+          </div>
+        </li>
+
+        <li class="tech" tabindex="0">
+          <i class="fa-solid fa-terminal"></i> Bash / Linux
+          <div class="tip" role="tooltip">
+            <h4>Bash / Linux</h4>
+            <p>Shell scripting, process tools, and developer workflows.</p>
+            <div class="mini-icons"><i class="fa-solid fa-gear"></i><i class="fa-solid fa-network-wired"></i></div>
+            <a href="https://www.gnu.org/software/bash/manual/bash.html" target="_blank" rel="noreferrer"><i
+                class="fa-solid fa-book-open"></i> Manual</a>
+          </div>
+        </li>
+
+        <li class="tech" tabindex="0">
+          <i class="fa-solid fa-robot"></i> GitHub Actions
+          <div class="tip" role="tooltip">
+            <h4>GitHub Actions</h4>
+            <p>CI for tests, builds, and automated deploys.</p>
+            <div class="mini-icons"><i class="fa-solid fa-rotate"></i><i class="fa-solid fa-cloud-arrow-up"></i></div>
+            <a href="https://docs.github.com/actions" target="_blank" rel="noreferrer"><i
+                class="fa-solid fa-book-open"></i> Docs</a>
+          </div>
+        </li>
+
         <ul class="tech-list reveal">
           <li class="tech" tabindex="0">
             <i class="fa-brands fa-python"></i> Python
@@ -1316,8 +1372,10 @@
           <img class="about-img" src="images/moamin-alt.jpg" alt="Working shot" />
           <div>
             <h3>Summary</h3>
-            <p>Technical Operations Coordinator with hands-on software projects in web and ML. Comfortable coordinating
-              between crews, suppliers, and clients while building tools that reduce friction.</p>
+            <p>Computer Engineering graduate and Technical Operations Coordinator at AJ Concord General Services Inc.
+              with experience across web, embedded, and automation projects.
+              I bridge technical design and real-world operations coordinating teams,
+              optimizing workflows, and building software that simplifies how work gets done.</p>
             <div class="highlights">
               <div class="highlight"><span>25%</span> efficiency gain via automation</div>
               <div class="highlight"><span>60%</span> faster customer responses</div>
@@ -1482,14 +1540,19 @@
     const form = document.forms['submit-to-google-sheet'];
     if (form) {
       const success = document.getElementById('success-message');
-      const scriptURL = 'https://script.google.com/macros/s/AKfycbwlRQhds0iwBG-lEeH_vi5T6CuL-eza7ct7P6-4rAFdC67dTtKK8r4TUifiiPGvyCzn/exec';
+      const scriptURL = '';
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
         try {
+          if (!scriptURL) {
+            alert("Thanks! The form is temporarily offline — please email me: moamin.aljuboori@gmail.com");
+            return;
+          }
           await fetch(scriptURL, { method: 'POST', body: new FormData(form) });
           form.reset();
           success.style.display = 'block';
           setTimeout(() => success.style.display = 'none', 1800);
+
         } catch (err) { console.error(err); }
       });
     }

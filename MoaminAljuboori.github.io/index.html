@@ -6,72 +6,92 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Moamin Al-Juboori • Computer Engineering</title>
   <meta name="description"
-    content="Moamin Al-Juboori — Computer Engineering student at the University of Guelph. Skills, Projects, Coursework, Experience, and Contact." />
+    content="Moamin Al-Juboori — Computer Engineering graduate from the University of Guelph. Skills, Projects, Coursework, Experience, and Contact." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
   <script src="https://kit.fontawesome.com/cd66936424.js" crossorigin="anonymous"></script>
 
   <style>
     /* ===== RESET & TOKENS ===== */
-    * {
+    *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
       padding: 0
     }
 
-    html {
-      scroll-behavior: smooth
-    }
+    html { scroll-behavior: smooth }
 
     :root {
-      --bg: #0b0e13;
-      --surface: #121722;
-      --muted: #96a0b5;
-      --text: #edf2ff;
-      --accent: #17e3ff;
-      --accent-2: #5df3ff;
-      --border: #223049;
-      --radius: 14px;
-      --shadow: 0 10px 30px rgba(0, 0, 0, .35)
+      --bg: #080b10;
+      --bg2: #0d1117;
+      --surface: #111720;
+      --surface2: #161d2a;
+      --muted: #7a8899;
+      --muted2: #b0bece;
+      --text: #e8f0fc;
+      --accent: #00e5ff;
+      --accent2: #00b8d9;
+      --accent-glow: rgba(0,229,255,0.18);
+      --accent-glow2: rgba(0,229,255,0.06);
+      --border: #1e2d42;
+      --border2: #253346;
+      --radius: 16px;
+      --shadow: 0 8px 32px rgba(0,0,0,.45);
+      --shadow-sm: 0 2px 12px rgba(0,0,0,.3);
+      --font-display: 'Syne', system-ui, sans-serif;
+      --font-body: 'DM Sans', system-ui, sans-serif;
     }
 
     :root.light {
-      --bg: #f6f8ff;
+      --bg: #f0f4fa;
+      --bg2: #f8faff;
       --surface: #ffffff;
-      --muted: #4b5567;
-      --text: #0b1220;
-      --accent: #0aa9bd;
-      --accent-2: #069bb0;
-      --border: #e4e8f4
+      --surface2: #f4f7fe;
+      --muted: #5a6678;
+      --muted2: #3a4558;
+      --text: #0a1220;
+      --accent: #0099bb;
+      --accent2: #007a99;
+      --accent-glow: rgba(0,153,187,0.15);
+      --accent-glow2: rgba(0,153,187,0.05);
+      --border: #dde4f0;
+      --border2: #ccd5e8;
     }
 
     body {
-      font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      font-family: var(--font-body);
       background: var(--bg);
       color: var(--text);
-      line-height: 1.55
+      line-height: 1.6;
+      font-size: 16px;
+      overflow-x: hidden;
     }
 
-    img {
-      max-width: 100%;
-      display: block
+    /* Subtle noise texture on bg */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.4;
     }
+
+    img { max-width: 100%; display: block }
 
     .container {
-      width: min(1120px, 92%);
-      margin-inline: auto
+      width: min(1140px, 92%);
+      margin-inline: auto;
+      position: relative;
+      z-index: 1;
     }
 
     .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-      border: 0
+      position: absolute; width: 1px; height: 1px;
+      padding: 0; overflow: hidden; clip: rect(0,0,0,0);
+      white-space: nowrap; border: 0
     }
 
     /* ===== NAV ===== */
@@ -79,67 +99,75 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      background: linear-gradient(180deg, rgba(11, 14, 19, .9), rgba(11, 14, 19, .6));
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid rgba(255, 255, 255, .04)
+      background: rgba(8,11,16,.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
     }
 
     :root.light .site-header {
-      background: linear-gradient(180deg, rgba(255, 255, 255, .92), rgba(255, 255, 255, .8));
-      border-bottom: 1px solid var(--border)
+      background: rgba(240,244,250,.9);
+      border-bottom: 1px solid var(--border);
     }
 
     .nav {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 14px 0
+      padding: 14px 0;
+      gap: 1rem;
     }
 
     .brand {
       display: flex;
       align-items: center;
       gap: .6rem;
-      font-weight: 700;
+      font-family: var(--font-display);
+      font-weight: 800;
       text-decoration: none;
       color: var(--text);
-      letter-spacing: .2px
+      letter-spacing: -.3px;
+      font-size: 1.05rem;
+      flex-shrink: 0;
     }
 
     .brand-logo {
-      width: 34px;
-      height: 34px
+      width: 34px; height: 34px;
     }
 
-    .accent {
-      color: var(--accent)
-    }
+    .accent { color: var(--accent) }
 
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 1.2rem;
-      list-style: none
+      gap: .3rem;
+      list-style: none;
     }
 
     .nav-links a {
       text-decoration: none;
-      color: var(--text);
-      padding: .5rem .6rem;
+      color: var(--muted2);
+      padding: .45rem .75rem;
       border-radius: 10px;
-      border: 1px solid transparent
+      font-size: .92rem;
+      font-weight: 500;
+      transition: color .2s, background .2s;
     }
 
     .nav-links a:hover,
     .nav-links a.active {
-      border-color: rgba(255, 255, 255, .12);
-      background: rgba(255, 255, 255, .04)
+      color: var(--text);
+      background: rgba(255,255,255,.06);
     }
 
     :root.light .nav-links a:hover,
     :root.light .nav-links a.active {
-      border-color: var(--border);
-      background: #f8fafc
+      background: var(--surface2);
+      color: var(--text);
+    }
+
+    .nav-links a.active {
+      color: var(--accent);
     }
 
     .nav-toggle {
@@ -147,253 +175,459 @@
       background: none;
       border: none;
       color: var(--text);
-      font-size: 1.25rem
+      font-size: 1.25rem;
+      cursor: pointer;
     }
 
     .mode-toggle {
       display: inline-flex;
       align-items: center;
       gap: .5rem;
-      background: none;
+      background: var(--surface);
       border: 1px solid var(--border);
       color: var(--text);
-      padding: .4rem .6rem;
+      padding: .4rem .65rem;
       border-radius: 10px;
-      cursor: pointer
+      cursor: pointer;
+      transition: border-color .2s, background .2s;
     }
 
-    .mode-toggle i {
-      font-size: 1rem
-    }
+    .mode-toggle:hover { border-color: var(--border2) }
+    .mode-toggle i { font-size: .95rem }
 
-    /* ===== LAYOUT ===== */
+    /* ===== PAGE SYSTEM ===== */
     .page {
       display: none;
       opacity: 0;
-      transform: translateY(16px);
-      transition: opacity .35s ease, transform .35s ease
+      transform: translateY(14px);
+      transition: opacity .3s ease, transform .3s ease;
     }
 
     .page.active {
       display: block;
       opacity: 1;
-      transform: none
+      transform: none;
     }
 
-    .section {
-      padding: clamp(40px, 5vw, 72px) 0
-    }
+    .section { padding: clamp(48px, 6vw, 80px) 0 }
 
-    .section-header {
-      margin-bottom: 22px
-    }
+    .section-header { margin-bottom: 28px }
 
     .section-header h1,
     .section-header h2 {
-      font-size: clamp(1.6rem, 3vw, 2.2rem);
-      letter-spacing: .3px
+      font-family: var(--font-display);
+      font-size: clamp(1.7rem, 3.2vw, 2.4rem);
+      font-weight: 800;
+      letter-spacing: -.5px;
+      line-height: 1.1;
     }
 
     .section-header p {
-      color: var(--muted)
+      color: var(--muted);
+      margin-top: 6px;
     }
 
     .inline-link {
-      color: var(--accent-2)
+      color: var(--accent);
+      text-decoration: none;
     }
 
-    /* ===== HERO (HOME) ===== */
+    .inline-link:hover { text-decoration: underline }
+
+    /* ===== HERO ===== */
     .hero {
-      padding: clamp(36px, 5vw, 84px) 0
+      padding: clamp(48px, 7vw, 96px) 0 clamp(40px, 5vw, 72px);
+      position: relative;
+    }
+
+    /* Decorative glow orb */
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -60px;
+      left: -120px;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
     }
 
     .hero-grid {
       display: grid;
-      grid-template-columns: 1.3fr .9fr;
-      gap: clamp(24px, 4vw, 48px);
-      align-items: center
+      grid-template-columns: 1.25fr 1fr;
+      gap: clamp(28px, 5vw, 64px);
+      align-items: center;
+      position: relative;
+      z-index: 1;
     }
 
     .eyebrow {
-      color: var(--accent-2);
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      color: var(--accent);
       font-weight: 600;
-      letter-spacing: .2px;
+      letter-spacing: .5px;
       text-transform: uppercase;
-      font-size: .9rem
+      font-size: .78rem;
+      border: 1px solid rgba(0,229,255,.2);
+      background: rgba(0,229,255,.06);
+      padding: .35rem .75rem;
+      border-radius: 999px;
+      margin-bottom: 16px;
+    }
+
+    .eyebrow::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 8px var(--accent);
+      flex-shrink: 0;
     }
 
     .hero h1 {
-      font-size: clamp(2rem, 4vw, 3.2rem);
-      line-height: 1.1;
-      margin-top: .5rem
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+      line-height: 1.05;
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      margin-bottom: 16px;
     }
 
     .lede {
-      margin-top: 12px;
-      color: var(--muted);
-      max-width: 60ch
+      color: var(--muted2);
+      max-width: 54ch;
+      font-size: 1.05rem;
+      line-height: 1.65;
     }
 
     .cta-row {
       display: flex;
-      gap: .8rem;
-      margin-top: 18px;
-      flex-wrap: wrap
+      gap: .85rem;
+      margin-top: 24px;
+      flex-wrap: wrap;
     }
 
     .btn {
-      --p: .9rem 1.1rem;
       display: inline-flex;
       gap: .5rem;
       align-items: center;
-      padding: var(--p);
+      padding: .75rem 1.25rem;
       border-radius: 12px;
       text-decoration: none;
       cursor: pointer;
-      border: 1px solid var(--border);
-      background: rgba(255, 255, 255, .02);
+      border: 1px solid var(--border2);
+      background: var(--surface);
       color: var(--text);
-      transition: transform .12s ease, background .2s ease, border-color .2s ease
+      font-family: var(--font-body);
+      font-size: .95rem;
+      font-weight: 500;
+      transition: transform .14s ease, background .2s, border-color .2s, box-shadow .2s;
     }
 
     .btn:hover {
-      transform: translateY(-1px);
-      border-color: rgba(255, 255, 255, .16)
+      transform: translateY(-2px);
+      border-color: var(--border2);
+      box-shadow: var(--shadow-sm);
     }
 
     .btn-primary {
-      background: linear-gradient(180deg, var(--accent), #00c9df);
-      color: #00161a;
+      background: var(--accent);
+      color: #001a20;
       border-color: transparent;
-      font-weight: 600
+      font-weight: 700;
+      box-shadow: 0 0 24px rgba(0,229,255,.25);
     }
 
-    :root.light .btn-primary {
-      background: linear-gradient(180deg, var(--accent), #0ec6da);
-      color: #002329
+    .btn-primary:hover {
+      background: #1aebff;
+      box-shadow: 0 0 32px rgba(0,229,255,.4);
     }
+
+    :root.light .btn-primary { color: #002530 }
 
     .btn-ghost {
-      background: rgba(255, 255, 255, .02)
+      background: rgba(255,255,255,.03);
     }
+
+    .btn-ghost:hover { background: rgba(255,255,255,.07) }
 
     .quick-facts {
       list-style: none;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      display: flex;
+      flex-wrap: wrap;
       gap: .6rem;
-      margin-top: 16px;
-      color: var(--muted)
+      margin-top: 20px;
     }
 
+    .quick-facts li {
+      display: flex;
+      align-items: center;
+      gap: .45rem;
+      color: var(--muted);
+      font-size: .9rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: .35rem .75rem;
+      border-radius: 999px;
+    }
+
+    .quick-facts li i {
+      color: var(--accent);
+      font-size: .8rem;
+    }
+
+    /* ===== HERO PORTRAIT ===== */
     .hero-portrait {
-      will-change: transform
+      position: relative;
+      will-change: transform;
     }
 
-    .hero-portrait img {
-      width: min(360px, 90%);
-      aspect-ratio: 1/1;
+    .portrait-frame {
+      position: relative;
+      width: min(380px, 100%);
+      margin-left: auto;
+    }
+
+    /* Decorative border behind the image */
+    .portrait-frame::before {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      border-radius: 26px;
+      background: linear-gradient(135deg, var(--accent), transparent 60%, var(--accent2));
+      z-index: 0;
+      opacity: .6;
+    }
+
+    .portrait-frame img {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      aspect-ratio: 3/4;
       object-fit: cover;
+      object-position: center top; /* ← FIXES THE FACE CROP */
       border-radius: 24px;
-      box-shadow: var(--shadow);
-      border: 1px solid var(--border)
+      display: block;
     }
 
-    /* ===== ABOUT STRIP (HOME) ===== */
+    /* Floating stat badges */
+    .badge {
+      position: absolute;
+      background: var(--surface2);
+      border: 1px solid var(--border2);
+      border-radius: 12px;
+      padding: 10px 14px;
+      z-index: 2;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(8px);
+    }
+
+    .badge .num {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .badge .label {
+      font-size: .72rem;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .badge-tl { top: 20px; left: -28px }
+    .badge-br { bottom: 36px; right: -24px }
+
+    /* ===== ABOUT STRIP ===== */
     .about-grid {
       display: grid;
-      grid-template-columns: .9fr 1.1fr;
-      gap: 28px;
-      align-items: center
+      grid-template-columns: .85fr 1.15fr;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .about-img-wrap {
+      position: relative;
     }
 
     .about-img {
-      border-radius: 18px;
+      border-radius: 20px;
       border: 1px solid var(--border);
-      box-shadow: var(--shadow)
+      box-shadow: var(--shadow);
+      width: 100%;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+      object-position: center top;
     }
 
     .highlights {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 16px
+      gap: 10px;
+      margin-top: 18px;
     }
 
     .highlight {
       background: var(--surface);
       border: 1px solid var(--border);
-      padding: 10px 14px;
-      border-radius: 100px;
-      color: var(--muted)
+      padding: 10px 16px;
+      border-radius: 12px;
+      color: var(--muted);
+      font-size: .88rem;
     }
 
     .highlight span {
       color: var(--accent);
+      font-family: var(--font-display);
       font-weight: 700;
-      margin-right: 6px
+      margin-right: 5px;
+    }
+
+    .about-text p {
+      color: var(--muted2);
+      line-height: 1.7;
+    }
+
+    .about-text h3 {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      letter-spacing: -.3px;
     }
 
     /* ===== CONTACT ===== */
     .contact-grid {
       display: grid;
-      grid-template-columns: .9fr 1.1fr;
-      gap: 20px;
-      align-items: start
+      grid-template-columns: .85fr 1.15fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .contact-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+    }
+
+    .contact-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 16px;
     }
 
     .contact-list {
       list-style: none;
       display: grid;
-      gap: 10px
+      gap: 12px;
     }
 
-    .contact-list a {
-      color: var(--text);
-      text-decoration: none
+    .contact-list li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .contact-list .icon-wrap {
+      width: 36px; height: 36px;
+      background: var(--accent-glow2);
+      border: 1px solid rgba(0,229,255,.15);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
     }
 
     .contact-list i {
       color: var(--accent);
-      margin-right: 8px
+      font-size: .9rem;
     }
 
+    .contact-list a {
+      color: var(--muted2);
+      text-decoration: none;
+      font-size: .94rem;
+      transition: color .2s;
+    }
+
+    .contact-list a:hover { color: var(--accent) }
+
     .contact-form {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
       display: grid;
-      gap: 10px
+      gap: 12px;
+    }
+
+    .contact-form h3 {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 4px;
     }
 
     .contact-form input,
     .contact-form textarea {
       width: 100%;
-      background: #0f1420;
+      background: var(--bg2);
       color: var(--text);
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 14px 16px
+      padding: 13px 16px;
+      font-family: var(--font-body);
+      font-size: .95rem;
+      outline: none;
+      transition: border-color .2s, box-shadow .2s;
     }
 
     :root.light .contact-form input,
-    :root.light .contact-form textarea {
-      background: #fff
+    :root.light .contact-form textarea { background: var(--bg) }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      border-color: var(--accent2);
+      box-shadow: 0 0 0 3px var(--accent-glow);
     }
 
-    .contact-form textarea {
-      min-height: 160px
-    }
+    .contact-form textarea { min-height: 140px; resize: vertical }
 
     .success-message {
       display: none;
-      margin-top: 6px;
-      color: #0ad67c
+      color: #0ad67c;
+      font-size: .9rem;
     }
 
     /* ===== SKILLS PAGE ===== */
+    .skills-group {
+      margin-bottom: 32px;
+    }
+
+    .skills-group-title {
+      font-family: var(--font-display);
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+
     .tech-list {
       list-style: none;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 12px
+      grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+      gap: 10px;
     }
 
     .tech {
@@ -404,65 +638,71 @@
       padding: 14px 16px;
       display: flex;
       align-items: center;
-      gap: .6rem;
-      cursor: default
+      gap: .65rem;
+      cursor: default;
+      transition: border-color .2s, background .2s, transform .15s;
+      font-size: .93rem;
     }
 
-    .tech i {
-      opacity: .95
+    .tech:hover {
+      border-color: var(--border2);
+      background: var(--surface2);
+      transform: translateY(-2px);
     }
+
+    .tech i { color: var(--accent); opacity: .9 }
 
     .tech .tip {
       position: absolute;
       left: 50%;
-      bottom: calc(100% + 10px);
+      bottom: calc(100% + 12px);
       transform: translateX(-50%) translateY(6px);
-      background: #0c1422;
-      color: #d9eeff;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 12px 14px;
+      background: var(--surface2);
+      color: var(--muted2);
+      border: 1px solid var(--border2);
+      border-radius: 14px;
+      padding: 14px 16px;
       box-shadow: var(--shadow);
       min-width: 240px;
       max-width: 320px;
-      line-height: 1.35;
+      line-height: 1.4;
       opacity: 0;
       pointer-events: none;
       transition: opacity .18s ease, transform .18s ease;
-      z-index: 5
+      z-index: 20;
     }
 
     :root.light .tech .tip {
       background: #fff;
-      color: #0b1220
+      color: var(--muted2);
     }
 
     .tech:hover .tip,
     .tech:focus-within .tip {
       opacity: 1;
-      transform: translateX(-50%) translateY(0)
+      transform: translateX(-50%) translateY(0);
     }
 
     .tip h4 {
+      font-family: var(--font-display);
       font-size: .95rem;
-      margin-bottom: 6px
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
     }
 
     .tip p {
       color: var(--muted);
-      font-size: .9rem;
-      margin-bottom: 8px
+      font-size: .88rem;
+      margin-bottom: 10px;
     }
 
     .tip .mini-icons {
       display: flex;
       gap: 8px;
       align-items: center;
-      margin-bottom: 8px
-    }
-
-    .tip .mini-icons i {
-      opacity: 1
+      margin-bottom: 10px;
+      color: var(--accent);
     }
 
     .tip a {
@@ -470,62 +710,63 @@
       gap: 6px;
       align-items: center;
       text-decoration: none;
-      border: 1px solid var(--border);
-      padding: .35rem .55rem;
+      border: 1px solid var(--border2);
+      padding: .35rem .65rem;
       border-radius: 10px;
-      color: var(--text)
+      color: var(--muted2);
+      font-size: .85rem;
+      transition: background .2s, color .2s;
     }
 
     .tip a:hover {
-      background: rgba(255, 255, 255, .06)
+      background: rgba(255,255,255,.06);
+      color: var(--text);
     }
 
-    /* remove any legacy tooltip approach */
-    .tech[data-desc]::after {
-      content: none !important
-    }
+    .tech[data-desc]::after { content: none !important }
 
     /* ===== PROJECTS PAGE ===== */
     .filter-bar {
       display: flex;
-      gap: 10px;
+      gap: 8px;
       flex-wrap: wrap;
-      margin: 10px 0 18px
+      margin: 8px 0 24px;
     }
 
     .filter-btn {
-      --p: .42rem .85rem;
+      padding: .4rem .9rem;
       border-radius: 999px;
       border: 1px solid var(--border);
-      background: rgba(255, 255, 255, .02);
-      color: var(--text);
+      background: rgba(255,255,255,.02);
+      color: var(--muted2);
       cursor: pointer;
       font-weight: 600;
+      font-size: .85rem;
+      font-family: var(--font-body);
       letter-spacing: .2px;
+      transition: border-color .2s, background .2s, color .2s;
     }
 
     .filter-btn:hover {
-      border-color: rgba(255, 255, 255, .16);
-      background: rgba(255, 255, 255, .04)
+      border-color: var(--border2);
+      background: rgba(255,255,255,.05);
+      color: var(--text);
     }
 
-    :root.light .filter-btn {
-      background: #fff
-    }
+    :root.light .filter-btn { background: #fff }
 
     .filter-btn.active {
       background: var(--accent);
-      color: #00161a;
+      color: #001a20;
       border-color: transparent;
-      box-shadow: 0 0 0 4px rgba(23, 227, 255, .18);
+      box-shadow: 0 0 0 3px var(--accent-glow);
     }
-
 
     .cards {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 18px;
-      align-items: stretch
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+      align-items: stretch;
     }
 
     .card {
@@ -535,69 +776,83 @@
       overflow: hidden;
       display: flex;
       flex-direction: column;
+      box-shadow: var(--shadow-sm);
+      transition: transform .2s, border-color .2s, box-shadow .2s;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: var(--border2);
       box-shadow: var(--shadow);
-      min-height: 100%
     }
 
     .card-media {
       aspect-ratio: 16/9;
-      background: #0e121a;
-      overflow: hidden
+      background: var(--bg2);
+      overflow: hidden;
     }
 
     .card-media img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      display: block
+      transition: transform .4s ease;
     }
+
+    .card:hover .card-media img { transform: scale(1.04) }
 
     .card-body {
       display: flex;
       flex-direction: column;
-      padding: 14px 16px;
+      padding: 16px 18px;
       gap: 8px;
-      flex: 1
+      flex: 1;
     }
 
     .card-body h3 {
-      font-size: 1.1rem;
-      line-height: 1.25
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 700;
+      line-height: 1.3;
     }
 
-    .card-body p {
-      color: var(--muted)
-    }
+    .card-body p { color: var(--muted); font-size: .9rem; line-height: 1.55 }
 
     .pill-list {
       list-style: none;
       display: flex;
       flex-wrap: wrap;
       gap: 6px;
-      margin-top: auto
+      margin-top: auto;
+      padding-top: 4px;
     }
 
     .pill-list li {
       border: 1px solid var(--border);
-      background: rgba(255, 255, 255, .02);
+      background: rgba(0,229,255,.04);
       border-radius: 999px;
-      padding: 6px 10px;
-      font-size: .85rem;
-      color: var(--text)
+      padding: 4px 10px;
+      font-size: .8rem;
+      color: var(--muted2);
     }
 
     .card-actions {
-      margin-top: auto;
       display: flex;
       gap: 8px;
-      padding: 0 16px 14px
+      padding: 0 18px 16px;
+    }
+
+    .btn-small {
+      padding: .5rem .9rem;
+      font-size: .85rem;
+      border-radius: 10px;
     }
 
     /* ===== COURSEWORK PAGE ===== */
     .course-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 12px
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 10px;
     }
 
     .course {
@@ -606,34 +861,33 @@
       border: 1px solid var(--border);
       border-radius: 12px;
       padding: 14px 16px;
-      color: var(--muted);
+      color: var(--muted2);
       cursor: default;
+      font-size: .9rem;
+      transition: border-color .2s, background .2s;
     }
 
     .course:hover {
-      border-color: rgba(255, 255, 255, .16)
+      border-color: var(--border2);
+      background: var(--surface2);
     }
 
-    :root.light .course:hover {
-      border-color: var(--border)
-    }
-
-    /* Tooltip built from data-desc */
     .course::after {
       content: attr(data-desc);
       position: absolute;
       left: 50%;
       bottom: calc(100% + 10px);
       transform: translateX(-50%) translateY(6px);
-      background: #0c1422;
-      color: #d9eeff;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 12px 14px;
+      background: var(--surface2);
+      color: var(--muted2);
+      border: 1px solid var(--border2);
+      border-radius: 14px;
+      padding: 12px 16px;
       box-shadow: var(--shadow);
       min-width: 240px;
       max-width: min(360px, 86vw);
-      line-height: 1.35;
+      line-height: 1.4;
+      font-size: .85rem;
       opacity: 0;
       pointer-events: none;
       transition: opacity .18s ease, transform .18s ease;
@@ -641,31 +895,22 @@
       text-wrap: pretty;
     }
 
-    :root.light .course::after {
-      background: #fff;
-      color: #0b1220
-    }
+    :root.light .course::after { background: #fff; color: var(--muted2) }
 
-    /* little arrow */
     .course::before {
       content: "";
       position: absolute;
       left: 50%;
       bottom: 100%;
       transform: translateX(-50%) translateY(6px);
-      border-width: 7px;
+      border-width: 6px;
       border-style: solid;
-      border-color: #0c1422 transparent transparent transparent;
+      border-color: var(--surface2) transparent transparent transparent;
       opacity: 0;
       transition: opacity .18s ease, transform .18s ease;
       z-index: 16;
     }
 
-    :root.light .course::before {
-      border-color: #fff transparent transparent transparent
-    }
-
-    /* show on hover/focus */
     .course:hover::after,
     .course:focus-within::after,
     .course:hover::before,
@@ -674,133 +919,174 @@
       transform: translateX(-50%) translateY(0);
     }
 
-
     /* ===== EXPERIENCE PAGE ===== */
     .timeline {
       list-style: none;
       border-left: 2px solid var(--border);
       margin-left: 8px;
-      padding-left: 18px;
+      padding-left: 24px;
       display: grid;
-      gap: 18px
+      gap: 24px;
     }
 
     .timeline li {
-      position: relative
+      position: relative;
     }
 
     .timeline li::before {
       content: "";
       position: absolute;
-      left: -10px;
-      top: .3rem;
-      width: 10px;
-      height: 10px;
-      border-radius: 999px;
+      left: -31px;
+      top: .4rem;
+      width: 12px; height: 12px;
+      border-radius: 50%;
       background: var(--accent);
-      box-shadow: 0 0 0 4px rgba(23, 227, 255, .18)
+      box-shadow: 0 0 0 4px var(--accent-glow), 0 0 12px var(--accent);
     }
 
     .timeline .time {
       color: var(--muted);
-      font-size: .92rem;
-      margin-bottom: 4px
+      font-size: .88rem;
+      margin-bottom: 6px;
+      font-weight: 500;
     }
 
     .timeline .content h3 {
+      font-family: var(--font-display);
       font-size: 1.05rem;
-      margin-bottom: 6px
+      font-weight: 700;
+      margin-bottom: 8px;
     }
 
-    .timeline .content p {
-      color: var(--muted)
+    .timeline .content p { color: var(--muted2); font-size: .93rem; line-height: 1.65 }
+    .timeline .content ul { margin-top: 10px; padding-left: 18px; color: var(--muted2); font-size: .9rem; display: grid; gap: 6px }
+
+    .timeline .pill-list.small { margin-top: 12px }
+    .timeline .pill-list.small li { font-size: .78rem }
+
+    /* ===== EXPERIENCE SUMMARY CARD ===== */
+    .exp-summary {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 32px;
+      display: grid;
+      grid-template-columns: .85fr 1.15fr;
+      gap: 32px;
+      align-items: center;
+      margin-bottom: 40px;
     }
 
-    .timeline .pill-list.small li {
-      font-size: .78rem
+    .exp-summary img {
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      object-position: center top;
     }
 
     /* ===== FOOTER ===== */
     .site-footer {
-      border-top: 1px solid rgba(255, 255, 255, .06);
-      background: #0a0e14;
-      margin-top: 40px
+      border-top: 1px solid var(--border);
+      background: var(--bg2);
+      margin-top: 48px;
+      position: relative;
+      z-index: 1;
     }
 
-    :root.light .site-footer {
-      background: #f9fbff;
-      border-top: 1px solid var(--border)
-    }
+    :root.light .site-footer { background: var(--surface2) }
 
     .footer-inner {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 18px 0
+      padding: 20px 0;
+      color: var(--muted);
+      font-size: .88rem;
+    }
+
+    .footer-inner a.brand {
+      font-size: .95rem;
     }
 
     .to-top {
-      color: var(--text);
+      color: var(--muted2);
       text-decoration: none;
       border: 1px solid var(--border);
-      padding: .5rem .6rem;
-      border-radius: 10px
+      padding: .45rem .6rem;
+      border-radius: 10px;
+      transition: border-color .2s, color .2s;
     }
+
+    .to-top:hover { border-color: var(--border2); color: var(--text) }
 
     /* ===== REVEAL ANIMATIONS ===== */
     .reveal {
       opacity: 0;
-      transform: translateY(14px);
-      transition: opacity .6s ease, transform .6s ease
+      transform: translateY(16px);
+      transition: opacity .6s ease, transform .6s ease;
     }
 
     .reveal.visible {
       opacity: 1;
-      transform: none
+      transform: none;
+    }
+
+    /* ===== DIVIDER ===== */
+    .section-divider {
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--border), transparent);
+      margin: 0;
     }
 
     /* ===== RESPONSIVE ===== */
-    @media (max-width:920px) {
-
+    @media (max-width: 900px) {
       .hero-grid,
       .about-grid,
-      .contact-grid {
-        grid-template-columns: 1fr
+      .contact-grid,
+      .exp-summary {
+        grid-template-columns: 1fr;
       }
 
-      .hero-portrait img {
-        width: min(420px, 100%)
+      .portrait-frame {
+        margin-left: 0;
+        width: min(380px, 80%);
+        margin-inline: auto;
       }
+
+      .badge-tl { left: 10px; top: 10px }
+      .badge-br { right: 10px; bottom: 50px }
+
+      .exp-summary img { aspect-ratio: 16/7 }
     }
 
-    @media (max-width:760px) {
-      .nav-toggle {
-        display: block
-      }
+    @media (max-width: 720px) {
+      .nav-toggle { display: block }
 
       .nav-links {
         position: absolute;
         right: 4%;
         top: 64px;
-        background: var(--surface);
+        background: var(--surface2);
         border: 1px solid var(--border);
-        border-radius: 12px;
+        border-radius: 14px;
         padding: 10px;
         display: none;
         flex-direction: column;
         gap: 4px;
-        box-shadow: var(--shadow)
+        box-shadow: var(--shadow);
+        min-width: 180px;
       }
 
-      .nav-links.open {
-        display: flex
-      }
+      .nav-links.open { display: flex }
+      .nav-links a { padding: .6rem .9rem; border-radius: 10px }
     }
 
     :focus-visible {
       outline: 2px dashed var(--accent);
       outline-offset: 2px;
-      border-radius: 8px
+      border-radius: 8px;
     }
   </style>
 </head>
@@ -812,14 +1098,14 @@
       <a class="brand" href="#/" aria-label="Go to home">
         <svg class="brand-logo" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="#0e1624" stroke="var(--border)" />
-          <path d="M6 18V6l4.8 6L15.6 6v12" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"
-            stroke-linejoin="round" />
-          <path d="M17 10h3M17 14h3" stroke="var(--accent-2)" stroke-width="2" stroke-linecap="round" />
+          <path d="M6 18V6l4.8 6L15.6 6v12" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M17 10h3M17 14h3" stroke="var(--accent2)" stroke-width="2" stroke-linecap="round" />
         </svg>
         <span>Moamin<span class="accent">.</span></span>
       </a>
-      <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links"><i
-          class="fa-solid fa-bars"></i></button>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links">
+        <i class="fa-solid fa-bars"></i>
+      </button>
       <ul id="nav-links" class="nav-links">
         <li><a data-route href="#/">Home</a></li>
         <li><a data-route href="#/skills">Skills</a></li>
@@ -828,7 +1114,8 @@
         <li><a data-route href="#/experience">Experience</a></li>
         <li>
           <button class="mode-toggle" id="modeToggle" aria-label="Toggle theme">
-            <i id="modeIcon" class="fa-solid fa-moon"></i><span class="sr-only">Toggle dark mode</span>
+            <i id="modeIcon" class="fa-solid fa-moon"></i>
+            <span class="sr-only">Toggle dark mode</span>
           </button>
         </li>
       </ul>
@@ -837,77 +1124,113 @@
 
   <!-- ===== PAGES ===== -->
   <main id="app">
+
     <!-- HOME -->
     <section id="page-home" class="page active">
+
+      <!-- HERO -->
       <section class="hero container reveal">
         <div class="hero-grid">
           <div class="hero-copy">
-            <p class="eyebrow">Computer Engineering @ University of Guelph</p>
-            <h1>Hi, I'm <span class="accent">Moamin Al-Juboori</span>.</h1>
-            <p class="lede">Fresh Computer Engineering graduate passionate about building reliable, user-friendly
-              systems.
-              I love solving complex problems with clean, practical code. I'm also actively looking for opportunities to
-              grow as a software/hardware engineer.</p>
+            <div class="eyebrow">Computer Engineering &mdash; University of Guelph</div>
+            <h1>Hi, I'm <span class="accent">Moamin<br>Al-Juboori.</span></h1>
+            <p class="lede">Computer Engineering graduate passionate about building reliable, user-friendly systems. I love solving complex problems with clean, practical code — and I'm actively looking for opportunities to grow as a software or hardware engineer.</p>
             <div class="cta-row">
-              <a class="btn btn-primary" href="images/Moamin's_Final_Resume.pdf" download><i class="fa-solid fa-download"></i>
-                Resume</a>
-              <a class="btn btn-ghost" href="#/projects"><i class="fa-solid fa-code"></i> See Projects</a>
+              <a class="btn btn-primary" href="images/Moamin_Resume_2025.pdf" download>
+                <i class="fa-solid fa-download"></i> Resume
+              </a>
+              <a class="btn btn-ghost" href="#/projects" data-route>
+                <i class="fa-solid fa-code"></i> See Projects
+              </a>
             </div>
             <ul class="quick-facts">
-              <li><i class="fa-regular fa-circle-check"></i> Java • Python • C</li>
-              <li><i class="fa-regular fa-circle-check"></i> React/Node • REST APIs</li>
-              <li><i class="fa-regular fa-circle-check"></i> Interests: automotive & embedded</li>
+              <li><i class="fa-solid fa-circle-check"></i> Java &bull; Python &bull; C &bull; JavaScript</li>
+              <li><i class="fa-solid fa-circle-check"></i> React &bull; Node &bull; REST APIs</li>
+              <li><i class="fa-solid fa-circle-check"></i> Automotive &amp; Embedded</li>
             </ul>
           </div>
+
           <div class="hero-portrait">
-            <img src="images/moamin-hero.jpg" alt="Portrait of Moamin" />
-          </div>
-        </div>
-      </section>
-
-      <section class="section container reveal">
-        <div class="about-grid">
-          <img class="about-img" src="images/moamin-about.jpg" alt="Moamin candid" />
-          <div>
-            <p>I'm a hands-on engineer who enjoys turning ideas into tools that genuinely make life easier
-              whether that's a clean UI, a working prototype, or a process that saves time. I've built full-stack
-              apps, worked on embedded systems, and I'm excited to explore more.</p>
-            <div class="highlights">
-              <div class="highlight"><span>4+</span> years coding</div>
-              <div class="highlight"><span>10+</span> projects</div>
-              <div class="highlight"><span>6+</span> core languages (Java, Python, C, C++, JavaScript, SQL)</div>
-
+            <div class="portrait-frame">
+              <!-- Badge top-left -->
+              <div class="badge badge-tl">
+                <div class="num">4+</div>
+                <div class="label">Years Coding</div>
+              </div>
+              <img src="images/moamin-hero.jpg" alt="Portrait of Moamin Al-Juboori" />
+              <!-- Badge bottom-right -->
+              <div class="badge badge-br">
+                <div class="num">10+</div>
+                <div class="label">Projects Shipped</div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
+      <div class="section-divider"></div>
+
+      <!-- ABOUT -->
+      <section class="section container reveal">
+        <div class="about-grid">
+          <div class="about-img-wrap">
+            <img class="about-img" src="images/moamin-about.jpg" alt="Moamin candid" />
+          </div>
+          <div class="about-text">
+            <h3>About Me</h3>
+            <p>I'm a hands-on engineer who enjoys turning ideas into tools that genuinely make life easier — whether that's a clean UI, a working prototype, or a process that saves time. I've built full-stack apps, shipped production features at a real startup, worked on embedded systems, and I'm always excited to explore more.</p>
+            <div class="highlights">
+              <div class="highlight"><span>4+</span> years coding</div>
+              <div class="highlight"><span>10+</span> projects shipped</div>
+              <div class="highlight"><span>6+</span> languages</div>
+              <div class="highlight"><span>2</span> internships / roles</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- CONTACT -->
       <section id="contact" class="section container reveal">
         <header class="section-header">
-          <h2>Contact</h2>
-          <p>Let's build something.</p>
+          <h2>Get in Touch</h2>
+          <p>Open to full-time roles, contracts, and interesting projects.</p>
         </header>
         <div class="contact-grid">
-          <div>
+          <div class="contact-card">
+            <h3>Contact Info</h3>
             <ul class="contact-list">
-              <li><i class="fa-solid fa-envelope"></i> <a
-                  href="mailto:moamin.aljuboori@gmail.com">moamin.aljuboori@gmail.com</a></li>
-              <li><i class="fa-solid fa-phone"></i> <a href="tel:+16475003796">+1 (647) 500-3796</a></li>
-              <li><i class="fa-brands fa-linkedin"></i> <a href="https://www.linkedin.com/in/moamin-aljuboori/"
-                  target="_blank">LinkedIn</a></li>
-              <li><i class="fa-brands fa-github"></i> <a href="https://github.com/MoaminAljuboori"
-                  target="_blank">GitHub</a></li>
+              <li>
+                <span class="icon-wrap"><i class="fa-solid fa-envelope"></i></span>
+                <a href="mailto:moamin.aljuboori@gmail.com">moamin.aljuboori@gmail.com</a>
+              </li>
+              <li>
+                <span class="icon-wrap"><i class="fa-solid fa-phone"></i></span>
+                <a href="tel:+16475003796">+1 (647) 500-3796</a>
+              </li>
+              <li>
+                <span class="icon-wrap"><i class="fa-brands fa-linkedin"></i></span>
+                <a href="https://www.linkedin.com/in/moamin-aljuboori/" target="_blank" rel="noreferrer">LinkedIn</a>
+              </li>
+              <li>
+                <span class="icon-wrap"><i class="fa-brands fa-github"></i></span>
+                <a href="https://github.com/MoaminAljuboori" target="_blank" rel="noreferrer">GitHub</a>
+              </li>
             </ul>
           </div>
+
           <form id="contact-form" name="submit-to-google-sheet" class="contact-form" aria-label="Contact form">
+            <h3>Send a Message</h3>
             <label class="sr-only" for="name">Your Name</label>
             <input type="text" id="name" name="name" placeholder="Your name" required>
             <label class="sr-only" for="email">Your Email</label>
             <input type="email" id="email" name="email" placeholder="you@example.com" required>
             <label class="sr-only" for="message">Your Message</label>
-            <textarea id="message" name="message" rows="6" placeholder="What can I help with?"></textarea>
-            <button type="submit" class="btn btn-primary">Send</button>
-            <div class="success-message" id="success-message" role="status" aria-live="polite">Message sent — thanks!
+            <textarea id="message" name="message" rows="5" placeholder="What can I help with?"></textarea>
+            <button type="submit" class="btn btn-primary">Send Message <i class="fa-solid fa-paper-plane"></i></button>
+            <div class="success-message" id="success-message" role="status" aria-live="polite">
+              <i class="fa-solid fa-circle-check"></i> Message sent — thanks!
             </div>
           </form>
         </div>
@@ -919,209 +1242,223 @@
       <div class="container section">
         <header class="section-header">
           <h1>Skills</h1>
-          <p>Tools and skills I've developed. Hover any skill for details.</p>
+          <p>Tools and technologies I've developed. Hover any card for details.</p>
         </header>
-        <ul class="tech-list reveal">
-          <li class="tech" tabindex="0">
-            <i class="fa-solid fa-code"></i> C++
-            <div class="tip" role="tooltip">
-              <h4>C++</h4>
-              <p>STL, RAII, and performance-minded data structures.</p>
-              <div class="mini-icons"><i class="fa-solid fa-bolt"></i><i class="fa-solid fa-cubes"></i></div>
-              <a href="https://en.cppreference.com/w/" target="_blank" rel="noreferrer"><i
-                  class="fa-solid fa-book-open"></i> Reference</a>
-            </div>
-          </li>
 
-          <li class="tech" tabindex="0">
-            <i class="fa-solid fa-file-code"></i> HTML / CSS
-            <div class="tip" role="tooltip">
-              <h4>HTML / CSS</h4>
-              <p>Responsive layouts, accessibility, animations, theming.</p>
-              <div class="mini-icons"><i class="fa-solid fa-universal-access"></i><i
-                  class="fa-solid fa-wand-magic-sparkles"></i></div>
-              <a href="https://developer.mozilla.org/en-US/docs/Learn" target="_blank" rel="noreferrer"><i
-                  class="fa-solid fa-book-open"></i> MDN</a>
-            </div>
-          </li>
-
-          <li class="tech" tabindex="0">
-            <i class="fa-solid fa-terminal"></i> Bash / Linux
-            <div class="tip" role="tooltip">
-              <h4>Bash / Linux</h4>
-              <p>Shell scripting, process tools, and developer workflows.</p>
-              <div class="mini-icons"><i class="fa-solid fa-gear"></i><i class="fa-solid fa-network-wired"></i></div>
-              <a href="https://www.gnu.org/software/bash/manual/bash.html" target="_blank" rel="noreferrer"><i
-                  class="fa-solid fa-book-open"></i> Manual</a>
-            </div>
-          </li>
-
-          <li class="tech" tabindex="0">
-            <i class="fa-solid fa-robot"></i> GitHub Actions
-            <div class="tip" role="tooltip">
-              <h4>GitHub Actions</h4>
-              <p>CI for tests, builds, and automated deploys.</p>
-              <div class="mini-icons"><i class="fa-solid fa-rotate"></i><i class="fa-solid fa-cloud-arrow-up"></i></div>
-              <a href="https://docs.github.com/actions" target="_blank" rel="noreferrer"><i
-                  class="fa-solid fa-book-open"></i> Docs</a>
-            </div>
-          </li>
-
-          <!-- (existing items below) -->
-          <li class="tech" tabindex="0">
-            <i class="fa-brands fa-python"></i> Python
-            <div class="tip" role="tooltip">
-              <h4>Python</h4>
-              <p>Clean scripting, REST APIs, data tasks, and automations.</p>
-              <div class="mini-icons"><i class="fa-solid fa-code"></i><i class="fa-solid fa-gears"></i><i
-                  class="fa-solid fa-database"></i></div>
-              <a href="https://docs.python.org/3/" target="_blank" rel="noreferrer"><i
-                  class="fa-solid fa-book-open"></i> Docs</a>
-            </div>
-          </li>
-
-          <li class="tech" tabindex="0">
-            <i class="fa-brands fa-java"></i> Java
-            <div class="tip" role="tooltip">
-              <h4>Java</h4>
-              <p>OOP patterns, collections, CLI tools, and testing basics.</p>
-              <div class="mini-icons"><i class="fa-solid fa-cubes"></i><i class="fa-solid fa-diagram-project"></i></div>
-              <a href="https://docs.oracle.com/javase/specs/" target="_blank" rel="noreferrer"><i
-                  class="fa-solid fa-book-open"></i> Docs</a>
-            </div>
-          </li>
-
-          <li class="tech" tabindex="0">
-            <i class="fa-solid fa-c"></i> C
-            <div class="tip" role="tooltip">
-              <h4>C</h4>
-              <p>Pointers, memory, and embedded-flavored coursework.</p>
-              <div class="mini-icons"><i class="fa-solid fa-microchip"></i><i class="fa-solid fa-memory"></i></div>
-              <a href="https://en.cppreference.com/w/c" target="_blank" rel="noreferrer"><i
-                  class="fa-solid fa-book-open"></i> Reference</a>
-            </div>
-          </li>
-
-          <li class="tech" tabindex="0">
-            <i class="fa-brands fa-js"></i> JavaScript / TypeScript
-            <div class="tip" role="tooltip">
-              <h4>JS / TS</h4>
-              <p>Typed UIs & APIs, modules, async/await, and tooling.</p>
-              <div class="mini-icons"><i class="fa-solid fa-bolt"></i><i class="fa-solid fa-file-code"></i></div>
-              <a href="https://www.typescriptlang.org/docs/" target="_blank" rel="noreferrer"><i
-                  class="fa-solid fa-book-open"></i> TS Docs</a>
-            </div>
-          </li>
-
-          <li class="tech" tabindex="0">
-            <i class="fa-brands fa-react"></i> React / Next.js
-            <div class="tip" role="tooltip">
-              <h4>React / Next</h4>
-              <p>Hooks, component patterns, routing, and bundling.</p>
-              <div class="mini-icons"><i class="fa-solid fa-layer-group"></i><i class="fa-solid fa-route"></i></div>
-              <a href="https://react.dev/learn" target="_blank" rel="noreferrer"><i class="fa-solid fa-book-open"></i>
-                React Docs</a>
-            </div>
-          </li>
-
-          <li class="tech" tabindex="0">
-            <i class="fa-brands fa-node"></i> Node.js / Express
-            <div class="tip" role="tooltip">
-              <h4>Node / Express</h4>
-              <p>RESTful APIs, middleware, auth, performance tuning.</p>
-              <div class="mini-icons"><i class="fa-solid fa-server"></i><i class="fa-solid fa-key"></i></div>
-              <a href="https://expressjs.com/" target="_blank" rel="noreferrer"><i class="fa-solid fa-book-open"></i>
-                Express Docs</a>
-            </div>
-          </li>
-
-          <li class="tech" tabindex="0">
-            <i class="fa-solid fa-database"></i> MongoDB / SQL
-            <div class="tip" role="tooltip">
-              <h4>Databases</h4>
-              <p>Schema design, indexes, joins, and query optimization.</p>
-              <div class="mini-icons"><i class="fa-solid fa-magnifying-glass-chart"></i><i
-                  class="fa-solid fa-table"></i></div>
-              <a href="https://www.mongodb.com/docs/" target="_blank" rel="noreferrer"><i
-                  class="fa-solid fa-book-open"></i> MongoDB Docs</a>
-            </div>
-          </li>
-
-          <li class="tech" tabindex="0">
-            <i class="fa-solid fa-brain"></i> TensorFlow (basics)
-            <div class="tip" role="tooltip">
-              <h4>TensorFlow</h4>
-              <p>Training fundamentals and small-app inference.</p>
-              <div class="mini-icons"><i class="fa-solid fa-wave-square"></i><i class="fa-solid fa-chart-line"></i>
+        <div class="skills-group reveal">
+          <div class="skills-group-title">Languages</div>
+          <ul class="tech-list">
+            <li class="tech" tabindex="0">
+              <i class="fa-brands fa-python"></i> Python
+              <div class="tip" role="tooltip">
+                <h4>Python</h4>
+                <p>Clean scripting, REST APIs, data tasks, and automations.</p>
+                <div class="mini-icons"><i class="fa-solid fa-code"></i><i class="fa-solid fa-gears"></i></div>
+                <a href="https://docs.python.org/3/" target="_blank" rel="noreferrer"><i class="fa-solid fa-book-open"></i> Docs</a>
               </div>
-              <a href="https://www.tensorflow.org/learn" target="_blank" rel="noreferrer"><i
-                  class="fa-solid fa-book-open"></i> Learn</a>
-            </div>
-          </li>
-
-          <li class="tech" tabindex="0">
-            <i class="fa-solid fa-code-branch"></i> Git / GitHub
-            <div class="tip" role="tooltip">
-              <h4>Git / GitHub</h4>
-              <p>Branching strategies, clean PRs, and release hygiene.</p>
-              <div class="mini-icons"><i class="fa-brands fa-git-alt"></i><i class="fa-brands fa-github"></i></div>
-              <a href="https://git-scm.com/docs" target="_blank" rel="noreferrer"><i class="fa-solid fa-book-open"></i>
-                Git Docs</a>
-            </div>
-          </li>
-
-          <li class="tech" tabindex="0">
-            <i class="fa-solid fa-shield-halved"></i> App Security (basics)
-            <div class="tip" role="tooltip">
-              <h4>Security</h4>
-              <p>API auth, rate limiting, input validation, and secrets.</p>
-              <div class="mini-icons"><i class="fa-solid fa-user-shield"></i><i class="fa-solid fa-lock"></i></div>
-              <a href="https://cheatsheetseries.owasp.org/" target="_blank" rel="noreferrer"><i
-                  class="fa-solid fa-book-open"></i> OWASP</a>
-            </div>
-          </li>
-
-          <li class="tech" tabindex="0">
-            <i class="fa-brands fa-docker"></i> Docker (basics)
-            <div class="tip" role="tooltip">
-              <h4>Docker</h4>
-              <p>Dev containers for reproducible local environments.</p>
-              <div class="mini-icons"><i class="fa-solid fa-box-archive"></i><i class="fa-solid fa-layer-group"></i>
+            </li>
+            <li class="tech" tabindex="0">
+              <i class="fa-brands fa-java"></i> Java
+              <div class="tip" role="tooltip">
+                <h4>Java</h4>
+                <p>OOP patterns, collections, CLI tools, and testing basics.</p>
+                <div class="mini-icons"><i class="fa-solid fa-cubes"></i></div>
+                <a href="https://docs.oracle.com/javase/specs/" target="_blank" rel="noreferrer"><i class="fa-solid fa-book-open"></i> Docs</a>
               </div>
-              <a href="https://docs.docker.com/get-started/" target="_blank" rel="noreferrer"><i
-                  class="fa-solid fa-book-open"></i> Get Started</a>
-            </div>
-          </li>
+            </li>
+            <li class="tech" tabindex="0">
+              <i class="fa-solid fa-c"></i> C
+              <div class="tip" role="tooltip">
+                <h4>C</h4>
+                <p>Pointers, memory management, and embedded-flavored coursework.</p>
+                <div class="mini-icons"><i class="fa-solid fa-microchip"></i><i class="fa-solid fa-memory"></i></div>
+                <a href="https://en.cppreference.com/w/c" target="_blank" rel="noreferrer"><i class="fa-solid fa-book-open"></i> Reference</a>
+              </div>
+            </li>
+            <li class="tech" tabindex="0">
+              <i class="fa-solid fa-code"></i> C++
+              <div class="tip" role="tooltip">
+                <h4>C++</h4>
+                <p>STL, RAII, and performance-minded data structures.</p>
+                <div class="mini-icons"><i class="fa-solid fa-bolt"></i><i class="fa-solid fa-cubes"></i></div>
+                <a href="https://en.cppreference.com/w/" target="_blank" rel="noreferrer"><i class="fa-solid fa-book-open"></i> Reference</a>
+              </div>
+            </li>
+            <li class="tech" tabindex="0">
+              <i class="fa-brands fa-js"></i> JavaScript / TypeScript
+              <div class="tip" role="tooltip">
+                <h4>JS / TS</h4>
+                <p>Typed UIs & APIs, modules, async/await, and tooling.</p>
+                <div class="mini-icons"><i class="fa-solid fa-bolt"></i><i class="fa-solid fa-file-code"></i></div>
+                <a href="https://www.typescriptlang.org/docs/" target="_blank" rel="noreferrer"><i class="fa-solid fa-book-open"></i> TS Docs</a>
+              </div>
+            </li>
+            <li class="tech" tabindex="0">
+              <i class="fa-solid fa-file-code"></i> HTML / CSS
+              <div class="tip" role="tooltip">
+                <h4>HTML / CSS</h4>
+                <p>Responsive layouts, accessibility, animations, theming.</p>
+                <div class="mini-icons"><i class="fa-solid fa-universal-access"></i><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                <a href="https://developer.mozilla.org/en-US/docs/Learn" target="_blank" rel="noreferrer"><i class="fa-solid fa-book-open"></i> MDN</a>
+              </div>
+            </li>
+          </ul>
+        </div>
 
-          <li class="tech" tabindex="0">
-            <i class="fa-solid fa-universal-access"></i> Accessible UI
-            <div class="tip" role="tooltip">
-              <h4>Accessible UI</h4>
-              <p>Keyboard-first flows and readable contrast.</p>
-              <div class="mini-icons"><i class="fa-solid fa-eye"></i><i class="fa-solid fa-keyboard"></i></div>
-              <a href="https://developer.mozilla.org/en-US/docs/Learn/Accessibility" target="_blank" rel="noreferrer"><i
-                  class="fa-solid fa-book-open"></i> MDN</a>
-            </div>
-          </li>
-        </ul>
+        <div class="skills-group reveal">
+          <div class="skills-group-title">Frameworks & Libraries</div>
+          <ul class="tech-list">
+            <li class="tech" tabindex="0">
+              <i class="fa-brands fa-react"></i> React / Next.js
+              <div class="tip" role="tooltip">
+                <h4>React / Next</h4>
+                <p>Hooks, component patterns, routing, and bundling.</p>
+                <div class="mini-icons"><i class="fa-solid fa-layer-group"></i><i class="fa-solid fa-route"></i></div>
+                <a href="https://react.dev/learn" target="_blank" rel="noreferrer"><i class="fa-solid fa-book-open"></i> React Docs</a>
+              </div>
+            </li>
+            <li class="tech" tabindex="0">
+              <i class="fa-brands fa-node"></i> Node.js / Express
+              <div class="tip" role="tooltip">
+                <h4>Node / Express</h4>
+                <p>RESTful APIs, middleware, auth, performance tuning.</p>
+                <div class="mini-icons"><i class="fa-solid fa-server"></i><i class="fa-solid fa-key"></i></div>
+                <a href="https://expressjs.com/" target="_blank" rel="noreferrer"><i class="fa-solid fa-book-open"></i> Express Docs</a>
+              </div>
+            </li>
+            <li class="tech" tabindex="0">
+              <i class="fa-solid fa-brain"></i> TensorFlow (basics)
+              <div class="tip" role="tooltip">
+                <h4>TensorFlow</h4>
+                <p>Training fundamentals and small-app inference.</p>
+                <div class="mini-icons"><i class="fa-solid fa-wave-square"></i><i class="fa-solid fa-chart-line"></i></div>
+                <a href="https://www.tensorflow.org/learn" target="_blank" rel="noreferrer"><i class="fa-solid fa-book-open"></i> Learn</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="skills-group reveal">
+          <div class="skills-group-title">Databases & Cloud</div>
+          <ul class="tech-list">
+            <li class="tech" tabindex="0">
+              <i class="fa-solid fa-database"></i> MongoDB / SQL
+              <div class="tip" role="tooltip">
+                <h4>Databases</h4>
+                <p>Schema design, indexes, joins, and query optimization.</p>
+                <div class="mini-icons"><i class="fa-solid fa-table"></i></div>
+                <a href="https://www.mongodb.com/docs/" target="_blank" rel="noreferrer"><i class="fa-solid fa-book-open"></i> MongoDB Docs</a>
+              </div>
+            </li>
+            <li class="tech" tabindex="0">
+              <i class="fa-solid fa-fire"></i> Firebase
+              <div class="tip" role="tooltip">
+                <h4>Firebase</h4>
+                <p>Firestore, Auth, Hosting — used in production projects.</p>
+                <div class="mini-icons"><i class="fa-solid fa-cloud"></i><i class="fa-solid fa-lock"></i></div>
+                <a href="https://firebase.google.com/docs" target="_blank" rel="noreferrer"><i class="fa-solid fa-book-open"></i> Docs</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="skills-group reveal">
+          <div class="skills-group-title">Tools & Platforms</div>
+          <ul class="tech-list">
+            <li class="tech" tabindex="0">
+              <i class="fa-solid fa-code-branch"></i> Git / GitHub
+              <div class="tip" role="tooltip">
+                <h4>Git / GitHub</h4>
+                <p>Branching strategies, clean PRs, and release hygiene.</p>
+                <div class="mini-icons"><i class="fa-brands fa-git-alt"></i><i class="fa-brands fa-github"></i></div>
+                <a href="https://git-scm.com/docs" target="_blank" rel="noreferrer"><i class="fa-solid fa-book-open"></i> Git Docs</a>
+              </div>
+            </li>
+            <li class="tech" tabindex="0">
+              <i class="fa-brands fa-docker"></i> Docker (basics)
+              <div class="tip" role="tooltip">
+                <h4>Docker</h4>
+                <p>Dev containers for reproducible local environments.</p>
+                <div class="mini-icons"><i class="fa-solid fa-box-archive"></i></div>
+                <a href="https://docs.docker.com/get-started/" target="_blank" rel="noreferrer"><i class="fa-solid fa-book-open"></i> Get Started</a>
+              </div>
+            </li>
+            <li class="tech" tabindex="0">
+              <i class="fa-solid fa-robot"></i> GitHub Actions
+              <div class="tip" role="tooltip">
+                <h4>GitHub Actions</h4>
+                <p>CI for tests, builds, and automated deploys.</p>
+                <div class="mini-icons"><i class="fa-solid fa-rotate"></i><i class="fa-solid fa-cloud-arrow-up"></i></div>
+                <a href="https://docs.github.com/actions" target="_blank" rel="noreferrer"><i class="fa-solid fa-book-open"></i> Docs</a>
+              </div>
+            </li>
+            <li class="tech" tabindex="0">
+              <i class="fa-solid fa-terminal"></i> Bash / Linux
+              <div class="tip" role="tooltip">
+                <h4>Bash / Linux</h4>
+                <p>Shell scripting, process tools, and developer workflows.</p>
+                <div class="mini-icons"><i class="fa-solid fa-gear"></i></div>
+                <a href="https://www.gnu.org/software/bash/manual/bash.html" target="_blank" rel="noreferrer"><i class="fa-solid fa-book-open"></i> Manual</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="skills-group reveal">
+          <div class="skills-group-title">Hardware & Embedded</div>
+          <ul class="tech-list">
+            <li class="tech" tabindex="0">
+              <i class="fa-solid fa-microchip"></i> Embedded C / RTOS
+              <div class="tip" role="tooltip">
+                <h4>Embedded C / RTOS</h4>
+                <p>Real-time programming, interrupts, and microcontroller interfacing.</p>
+                <div class="mini-icons"><i class="fa-solid fa-memory"></i></div>
+              </div>
+            </li>
+            <li class="tech" tabindex="0">
+              <i class="fa-solid fa-bolt"></i> FPGA / VHDL
+              <div class="tip" role="tooltip">
+                <h4>FPGA / VHDL</h4>
+                <p>Digital logic design, reconfigurable systems, and hardware description.</p>
+                <div class="mini-icons"><i class="fa-solid fa-diagram-project"></i></div>
+              </div>
+            </li>
+            <li class="tech" tabindex="0">
+              <i class="fa-solid fa-shield-halved"></i> App Security (basics)
+              <div class="tip" role="tooltip">
+                <h4>Security</h4>
+                <p>API auth, rate limiting, input validation, and secrets.</p>
+                <div class="mini-icons"><i class="fa-solid fa-lock"></i></div>
+                <a href="https://cheatsheetseries.owasp.org/" target="_blank" rel="noreferrer"><i class="fa-solid fa-book-open"></i> OWASP</a>
+              </div>
+            </li>
+            <li class="tech" tabindex="0">
+              <i class="fa-solid fa-universal-access"></i> Accessible UI
+              <div class="tip" role="tooltip">
+                <h4>Accessible UI</h4>
+                <p>Keyboard-first flows and readable contrast.</p>
+                <div class="mini-icons"><i class="fa-solid fa-eye"></i><i class="fa-solid fa-keyboard"></i></div>
+                <a href="https://developer.mozilla.org/en-US/docs/Learn/Accessibility" target="_blank" rel="noreferrer"><i class="fa-solid fa-book-open"></i> MDN</a>
+              </div>
+            </li>
+          </ul>
+        </div>
 
       </div>
     </section>
+
     <!-- PROJECTS -->
     <section id="page-projects" class="page">
       <div class="container section">
         <header class="section-header">
           <h1>Projects</h1>
-          <p>Selected work. More on
-            <a class="inline-link" href="https://github.com/MoaminAljuboori" target="_blank"
-              rel="noreferrer">GitHub</a>.
-          </p>
+          <p>Selected work. More on <a class="inline-link" href="https://github.com/MoaminAljuboori" target="_blank" rel="noreferrer">GitHub</a>.</p>
         </header>
 
         <div class="filter-bar" role="tablist">
           <button class="filter-btn active" data-filter="all">All</button>
           <button class="filter-btn" data-filter="web">Web</button>
-          <button class="filter-btn" data-filter="ml">ML</button>
+          <button class="filter-btn" data-filter="ml">ML / AI</button>
           <button class="filter-btn" data-filter="algorithms">Algorithms</button>
         </div>
 
@@ -1130,18 +1467,15 @@
             <figure class="card-media"><img src="images/ecommerce.png" alt="E-Commerce Platform" /></figure>
             <div class="card-body">
               <h3>Full-Stack E-Commerce Platform</h3>
-              <p>React + Node.js store with Stripe, Firebase hosting, and role-based auth. ~40% API latency reduction
-                via query tuning.</p>
+              <p>React + Node.js store with Stripe, Firebase hosting, and role-based auth. ~40% API latency reduction via query tuning.</p>
               <ul class="pill-list">
-                <li>React</li>
-                <li>Node.js</li>
-                <li>MongoDB</li>
-                <li>Stripe</li>
+                <li>React</li><li>Node.js</li><li>MongoDB</li><li>Stripe</li><li>Firebase</li>
               </ul>
             </div>
             <div class="card-actions">
-              <a class="btn btn-small" href="https://github.com/MoaminAljuboori" target="_blank"><i
-                  class="fa-brands fa-github"></i> Code</a>
+              <a class="btn btn-small" href="https://github.com/MoaminAljuboori" target="_blank" rel="noreferrer">
+                <i class="fa-brands fa-github"></i> Code
+              </a>
             </div>
           </article>
 
@@ -1149,17 +1483,15 @@
             <figure class="card-media"><img src="images/chatbot.png" alt="AI Customer Support Chatbot" /></figure>
             <div class="card-body">
               <h3>AI Customer Support Chatbot</h3>
-              <p>React, Node.js, and OpenAI API for customer Q&amp;A and order tracking. Cut resolution time by ~60%.
-              </p>
+              <p>React, Node.js, and OpenAI API for customer Q&A and order tracking. Cut resolution time by ~60%.</p>
               <ul class="pill-list">
-                <li>React</li>
-                <li>Node.js</li>
-                <li>OpenAI API</li>
+                <li>React</li><li>Node.js</li><li>OpenAI API</li><li>Firebase</li>
               </ul>
             </div>
             <div class="card-actions">
-              <a class="btn btn-small" href="https://github.com/MoaminAljuboori" target="_blank"><i
-                  class="fa-brands fa-github"></i> Code</a>
+              <a class="btn btn-small" href="https://github.com/MoaminAljuboori" target="_blank" rel="noreferrer">
+                <i class="fa-brands fa-github"></i> Code
+              </a>
             </div>
           </article>
 
@@ -1167,18 +1499,15 @@
             <figure class="card-media"><img src="images/inventory.png" alt="Smart Inventory Management" /></figure>
             <div class="card-body">
               <h3>Smart Inventory Management</h3>
-              <p>Python + Flask + TensorFlow demand forecasting (~85% accuracy), low-stock alerts, and supplier
-                notifications.</p>
+              <p>Python + Flask + TensorFlow demand forecasting (~85% accuracy), low-stock alerts, and supplier notifications.</p>
               <ul class="pill-list">
-                <li>Python</li>
-                <li>Flask</li>
-                <li>MongoDB</li>
-                <li>TensorFlow</li>
+                <li>Python</li><li>Flask</li><li>MongoDB</li><li>TensorFlow</li>
               </ul>
             </div>
             <div class="card-actions">
-              <a class="btn btn-small" href="https://github.com/MoaminAljuboori" target="_blank"><i
-                  class="fa-brands fa-github"></i> Code</a>
+              <a class="btn btn-small" href="https://github.com/MoaminAljuboori" target="_blank" rel="noreferrer">
+                <i class="fa-brands fa-github"></i> Code
+              </a>
             </div>
           </article>
 
@@ -1186,15 +1515,15 @@
             <figure class="card-media"><img src="images/Sudoku Solver.png" alt="Sudoku Solver" /></figure>
             <div class="card-body">
               <h3>Sudoku Solver</h3>
-              <p>Python app that generates &amp; solves Sudoku using backtracking with optional visualization.</p>
+              <p>Python app that generates &amp; solves Sudoku using backtracking with optional step-by-step visualization.</p>
               <ul class="pill-list">
-                <li>Python</li>
-                <li>Algorithms</li>
+                <li>Python</li><li>Algorithms</li>
               </ul>
             </div>
             <div class="card-actions">
-              <a class="btn btn-small" href="https://github.com/AmooniG/Sudoku-Solver" target="_blank"><i
-                  class="fa-brands fa-github"></i> Code</a>
+              <a class="btn btn-small" href="https://github.com/AmooniG/Sudoku-Solver" target="_blank" rel="noreferrer">
+                <i class="fa-brands fa-github"></i> Code
+              </a>
             </div>
           </article>
 
@@ -1204,14 +1533,13 @@
               <h3>WeatherApp</h3>
               <p>City search with OpenWeatherMap API; clean UI, error states, and loading feedback.</p>
               <ul class="pill-list">
-                <li>HTML</li>
-                <li>CSS</li>
-                <li>JavaScript</li>
+                <li>HTML</li><li>CSS</li><li>JavaScript</li>
               </ul>
             </div>
             <div class="card-actions">
-              <a class="btn btn-small" href="https://github.com/AmooniG/WeatherApp" target="_blank"><i
-                  class="fa-brands fa-github"></i> Code</a>
+              <a class="btn btn-small" href="https://github.com/AmooniG/WeatherApp" target="_blank" rel="noreferrer">
+                <i class="fa-brands fa-github"></i> Code
+              </a>
             </div>
           </article>
 
@@ -1219,158 +1547,75 @@
             <figure class="card-media"><img src="images/Finance.png" alt="Finance Tracker" /></figure>
             <div class="card-body">
               <h3>Finance Tracker</h3>
-              <p>Tracks transactions, budgets, and investments; integrates RESTful APIs and basic ML for spending
-                insights.</p>
+              <p>Tracks transactions, budgets, and investments; integrates RESTful APIs and basic ML for spending insights.</p>
               <ul class="pill-list">
-                <li>Python</li>
-                <li>Flask</li>
-                <li>APIs</li>
+                <li>Python</li><li>Flask</li><li>APIs</li>
               </ul>
             </div>
             <div class="card-actions">
-              <a class="btn btn-small" href="https://github.com/AmooniG/Finance-Tracker" target="_blank"><i
-                  class="fa-brands fa-github"></i> Code</a>
+              <a class="btn btn-small" href="https://github.com/AmooniG/Finance-Tracker" target="_blank" rel="noreferrer">
+                <i class="fa-brands fa-github"></i> Code
+              </a>
             </div>
           </article>
         </section>
       </div>
     </section>
 
-    <!-- COURSEWORK (complete list) -->
+    <!-- COURSEWORK -->
     <section id="page-coursework" class="page">
       <div class="container section">
         <header class="section-header">
           <h1>Coursework</h1>
-          <p>Completed & registered courses.</p>
+          <p>Completed &amp; registered courses. Hover any card for a description.</p>
         </header>
 
         <div class="course-grid reveal">
           <!-- 1000-level -->
-          <div class="course" tabindex="0"
-            data-desc="Limits, continuity, derivatives, Fundamental Theorem of Calculus, and basic integral applications.">
-            MATH*1200 — Calculus I</div>
-          <div class="course" tabindex="0"
-            data-desc="Series, techniques of integration, polar/parametric, partial derivatives, and intro multivariable.">
-            MATH*1210 — Calculus II</div>
-          <div class="course" tabindex="0"
-            data-desc="Intro chemistry: bonding, stoichiometry, equilibria (acids/bases/buffers), and basic organic.">
-            CHEM*1040 — General Chemistry I</div>
-          <div class="course" tabindex="0"
-            data-desc="Kinematics/dynamics, SHM, waves, acoustics, optics, and intro quantum; engineering focus.">
-            PHYS*1130 — Intro Physics with Applications</div>
-          <div class="course" tabindex="0"
-            data-desc="E&M fundamentals and DC circuits: fields, potential, Ohm/Kirchhoff laws, nodes/meshes, intro AC.">
-            PHYS*1010 — Intro Electricity & Magnetism</div>
-          <div class="course" tabindex="0"
-            data-desc="Linear algebra for engineers: matrices, vector spaces, eigenvalues/eigenvectors, transformations.">
-            ENGG*1500 — Engineering Analysis</div>
-          <div class="course" tabindex="0"
-            data-desc="Design process, sketching/CAD, engineering drawings, teamwork, ethics, communication.">ENGG*1100
-            — Engineering & Design I</div>
-          <div class="course" tabindex="0"
-            data-desc="Intro programming for engineers: modularization, pointers, recursion, files, basic data structures.">
-            CIS*1410 — Intro Programming for Engineers (Transfer Eqv.)</div>
-          <div class="course" tabindex="0"
-            data-desc="OOP for engineers: classes, inheritance, polymorphism, exceptions, files/streams; team project.">
-            CIS*1420 — Object-Oriented Programming (Transfer Eqv.)</div>
-          <div class="course" tabindex="0"
-            data-desc="History of science/tech across cultures; how knowledge moved and shaped societies.">HIST*1250 —
-            Science & Technology in a Global Context</div>
-
+          <div class="course" tabindex="0" data-desc="Limits, continuity, derivatives, Fundamental Theorem of Calculus, and basic integral applications.">MATH*1200 — Calculus I</div>
+          <div class="course" tabindex="0" data-desc="Series, techniques of integration, polar/parametric, partial derivatives, and intro multivariable.">MATH*1210 — Calculus II</div>
+          <div class="course" tabindex="0" data-desc="Intro chemistry: bonding, stoichiometry, equilibria (acids/bases/buffers), and basic organic.">CHEM*1040 — General Chemistry I</div>
+          <div class="course" tabindex="0" data-desc="Kinematics/dynamics, SHM, waves, acoustics, optics, and intro quantum; engineering focus.">PHYS*1130 — Intro Physics with Applications</div>
+          <div class="course" tabindex="0" data-desc="E&M fundamentals and DC circuits: fields, potential, Ohm/Kirchhoff laws, nodes/meshes, intro AC.">PHYS*1010 — Intro Electricity & Magnetism</div>
+          <div class="course" tabindex="0" data-desc="Linear algebra for engineers: matrices, vector spaces, eigenvalues/eigenvectors, transformations.">ENGG*1500 — Engineering Analysis</div>
+          <div class="course" tabindex="0" data-desc="Design process, sketching/CAD, engineering drawings, teamwork, ethics, communication.">ENGG*1100 — Engineering & Design I</div>
+          <div class="course" tabindex="0" data-desc="Intro programming for engineers: modularization, pointers, recursion, files, basic data structures.">CIS*1410 — Intro Programming for Engineers (Transfer Eqv.)</div>
+          <div class="course" tabindex="0" data-desc="OOP for engineers: classes, inheritance, polymorphism, exceptions, files/streams; team project.">CIS*1420 — Object-Oriented Programming (Transfer Eqv.)</div>
+          <div class="course" tabindex="0" data-desc="History of science/tech across cultures; how knowledge moved and shaped societies.">HIST*1250 — Science & Technology in a Global Context</div>
           <!-- 2000-level -->
-          <div class="course" tabindex="0"
-            data-desc="Statics/dynamics: free-body diagrams, rigid body equilibrium, internal loads, friction, impulse/momentum.">
-            ENGG*1210 — Engineering Mechanics I</div>
-          <div class="course" tabindex="0"
-            data-desc="Systems modeling (mech/elect/thermal/fluid), LTI systems, Laplace, transfer functions, step/impulse.">
-            ENGG*2400 — Engineering Systems Analysis</div>
-          <div class="course" tabindex="0"
-            data-desc="Combinational/sequential logic, VHDL, PLDs/FPGAs, testing/DFT; controller-style designs.">
-            ENGG*2410 — Digital Systems Design</div>
-          <div class="course" tabindex="0"
-            data-desc="Circuit analysis: nodal/mesh, superposition, Thevenin/Norton, op-amps, 1st/2nd-order, AC phasors.">
-            ENGG*2450 — Electric Circuits</div>
-          <div class="course" tabindex="0"
-            data-desc="Data structures and algorithms on lists/stacks/queues/trees/tables; searching/sorting; complexity intro.">
-            CIS*2520 — Data Structures</div>
-          <div class="course" tabindex="0"
-            data-desc="Sequences/sums/recurrence, combinatorics, discrete probability, graph theory for CS.">CIS*2910 —
-            Discrete Structures II</div>
-          <div class="course" tabindex="0"
-            data-desc="Differential equations for engineering: 1st/2nd order, systems, Laplace, series solutions, intro PDEs.">
-            MATH*2270 — Applied Differential Equations</div>
-          <div class="course" tabindex="0"
-            data-desc="Probability, distributions, estimation, inference, regression/LS, quality control & reliability basics.">
-            STAT*2120 — Probability & Statistics for Engineers</div>
-          <div class="course" tabindex="0"
-            data-desc="Proposal economics: capital vs operating, B/C ratio, break-even, risk, replacement, taxes, finance effects.">
-            ENGG*3240 — Engineering Economics</div>
-          <div class="course" tabindex="0"
-            data-desc="Numerical methods: root finding, interpolation, numerical diff/integration, ODE IVP/BVP, linear/nonlinear systems.">
-            MATH*2130 — Numerical Methods</div>
-
+          <div class="course" tabindex="0" data-desc="Statics/dynamics: free-body diagrams, rigid body equilibrium, internal loads, friction, impulse/momentum.">ENGG*1210 — Engineering Mechanics I</div>
+          <div class="course" tabindex="0" data-desc="Systems modeling (mech/elect/thermal/fluid), LTI systems, Laplace, transfer functions, step/impulse.">ENGG*2400 — Engineering Systems Analysis</div>
+          <div class="course" tabindex="0" data-desc="Combinational/sequential logic, VHDL, PLDs/FPGAs, testing/DFT; controller-style designs.">ENGG*2410 — Digital Systems Design</div>
+          <div class="course" tabindex="0" data-desc="Circuit analysis: nodal/mesh, superposition, Thevenin/Norton, op-amps, 1st/2nd-order, AC phasors.">ENGG*2450 — Electric Circuits</div>
+          <div class="course" tabindex="0" data-desc="Data structures and algorithms on lists/stacks/queues/trees/tables; searching/sorting; complexity intro.">CIS*2520 — Data Structures</div>
+          <div class="course" tabindex="0" data-desc="Sequences/sums/recurrence, combinatorics, discrete probability, graph theory for CS.">CIS*2910 — Discrete Structures II</div>
+          <div class="course" tabindex="0" data-desc="Differential equations for engineering: 1st/2nd order, systems, Laplace, series solutions, intro PDEs.">MATH*2270 — Applied Differential Equations</div>
+          <div class="course" tabindex="0" data-desc="Probability, distributions, estimation, inference, regression/LS, quality control & reliability basics.">STAT*2120 — Probability & Statistics for Engineers</div>
+          <div class="course" tabindex="0" data-desc="Proposal economics: capital vs operating, B/C ratio, break-even, risk, replacement, taxes, finance effects.">ENGG*3240 — Engineering Economics</div>
+          <div class="course" tabindex="0" data-desc="Numerical methods: root finding, interpolation, numerical diff/integration, ODE IVP/BVP, linear/nonlinear systems.">MATH*2130 — Numerical Methods</div>
           <!-- 3000-level -->
-          <div class="course" tabindex="0"
-            data-desc="Team design with CAD/CAE/DB tools; safety & sustainability; project mgmt and technical writing.">
-            ENGG*2100 — Engineering & Design II</div>
-          <div class="course" tabindex="0"
-            data-desc="OS components: scheduling, processes/threads, memory, files, I/O, and client-server mechanisms.">
-            CIS*3110 — Operating Systems</div>
-          <div class="course" tabindex="0"
-            data-desc="Algorithms: design/analysis, asymptotics, graph algorithms, matrix methods, NP-completeness.">
-            CIS*3490 — Analysis & Design of Algorithms</div>
-          <div class="course" tabindex="0"
-            data-desc="Signals & systems: LTI, convolution, Fourier/Laplace/DTFT/DFT/Z, analog/digital filter design.">
-            ENGG*3390 — Signal Processing</div>
-          <div class="course" tabindex="0"
-            data-desc="Computer org/arch: ISA, datapath, control (hardwired/microcode), CISC/RISC/DSP, memory hierarchy; VHDL CPU project.">
-            ENGG*3380 — Computer Organization & Design</div>
-          <div class="course" tabindex="0"
-            data-desc="Embedded reconfigurable systems with FPGAs: HDLs (VHDL/Verilog), placement/routing, HW/SW co-design.">
-            ENGG*3050 — Embedded Reconfigurable Computer Systems</div>
-          <div class="course" tabindex="0"
-            data-desc="Interfacing microcomputers: drivers, real-time programming, interrupts, serial/parallel I/O, buses, DMA, data acquisition.">
-            ENGG*3640 — Microcomputer Interfacing</div>
-          <div class="course" tabindex="0"
-            data-desc="Team design with interdisciplinary collab; defend solutions re: function, safety, economics, env/social impact.">
-            ENGG*3100 — Engineering & Design III</div>
-          <div class="course" tabindex="0"
-            data-desc="Comms & networking basics: signaling/encoding, multiplexing, error control, MAC, switching/routing, services/security.">
-            ENGG*3210 — Communication Systems</div>
-          <div class="course" tabindex="0"
-            data-desc="Control theory: modeling, Bode, stability (Routh/Nyquist), margins/sensitivity, PID, root locus & freq-domain design.">
-            ENGG*3410 — Systems & Control Theory</div>
-          <div class="course" tabindex="0"
-            data-desc="Large interactive systems: multi-language modules, specs, modularity, persistence, intro DB tools.">
-            CIS*2750 — Software Systems Dev & Integration</div>
-          <div class="course" tabindex="0"
-            data-desc="Team-based systems analysis & design lifecycle; stakeholder reqs, modeling, and delivery practices.">
-            CIS*3750 — Systems Analysis & Design</div>
-
+          <div class="course" tabindex="0" data-desc="Team design with CAD/CAE/DB tools; safety & sustainability; project mgmt and technical writing.">ENGG*2100 — Engineering & Design II</div>
+          <div class="course" tabindex="0" data-desc="OS components: scheduling, processes/threads, memory, files, I/O, and client-server mechanisms.">CIS*3110 — Operating Systems</div>
+          <div class="course" tabindex="0" data-desc="Algorithms: design/analysis, asymptotics, graph algorithms, matrix methods, NP-completeness.">CIS*3490 — Analysis & Design of Algorithms</div>
+          <div class="course" tabindex="0" data-desc="Signals & systems: LTI, convolution, Fourier/Laplace/DTFT/DFT/Z, analog/digital filter design.">ENGG*3390 — Signal Processing</div>
+          <div class="course" tabindex="0" data-desc="Computer org/arch: ISA, datapath, control (hardwired/microcode), CISC/RISC/DSP, memory hierarchy; VHDL CPU project.">ENGG*3380 — Computer Organization & Design</div>
+          <div class="course" tabindex="0" data-desc="Embedded reconfigurable systems with FPGAs: HDLs (VHDL/Verilog), placement/routing, HW/SW co-design.">ENGG*3050 — Embedded Reconfigurable Computer Systems</div>
+          <div class="course" tabindex="0" data-desc="Interfacing microcomputers: drivers, real-time programming, interrupts, serial/parallel I/O, buses, DMA, data acquisition.">ENGG*3640 — Microcomputer Interfacing</div>
+          <div class="course" tabindex="0" data-desc="Team design with interdisciplinary collab; defend solutions re: function, safety, economics, env/social impact.">ENGG*3100 — Engineering & Design III</div>
+          <div class="course" tabindex="0" data-desc="Comms & networking basics: signaling/encoding, multiplexing, error control, MAC, switching/routing, services/security.">ENGG*3210 — Communication Systems</div>
+          <div class="course" tabindex="0" data-desc="Control theory: modeling, Bode, stability (Routh/Nyquist), margins/sensitivity, PID, root locus & freq-domain design.">ENGG*3410 — Systems & Control Theory</div>
+          <div class="course" tabindex="0" data-desc="Large interactive systems: multi-language modules, specs, modularity, persistence, intro DB tools.">CIS*2750 — Software Systems Dev & Integration</div>
+          <div class="course" tabindex="0" data-desc="Team-based systems analysis & design lifecycle; stakeholder reqs, modeling, and delivery practices.">CIS*3750 — Systems Analysis & Design</div>
           <!-- 4000-level -->
-          <div class="course" tabindex="0"
-            data-desc="Capstone proposal: team formation, advisor selection, scope/objectives, plan for ENGG*4170.">
-            ENGG*4000 — Proposal for Engineering Design IV</div>
-          <div class="course" tabindex="0"
-            data-desc="Real-time systems: RT control & modeling, RTOS primitives/IPC, scheduling (uni/multiprocessor), fault tolerance.">
-            ENGG*4420 — Real-Time Systems Design</div>
-          <div class="course" tabindex="0"
-            data-desc="Capstone: complete CE design with socio-economic & environmental assessment; reports & poster to pro standard.">
-            ENGG*4170 — Computer Engineering Design IV</div>
-          <div class="course" tabindex="0"
-            data-desc="Advanced CPU topics: deep pipelines/ILP, TLP/MP, caches/VM, interconnects, storage, modern arch trade-offs.">
-            ENGG*4540 — Advanced Computer Architecture</div>
-          <div class="course" tabindex="0"
-            data-desc="VLSI digital design: MOS devices, CMOS logic, dynamic circuits, latches/registers, timing, adders/multipliers, memory, low power.">
-            ENGG*4550 — VLSI Digital Design</div>
-          <div class="course" tabindex="0"
-            data-desc="Architecture at scale: styles, case studies, modeling/specification, and tooling; analyze/redesign an existing system.">
-            ENGG*4450 — Large-Scale Software Architecture Eng.</div>
-          <div class="course" tabindex="0"
-            data-desc="Robot kinematics, trajectory planning, languages, sensors, and applications (assembly/manufacturing/medical/services).">
-            ENGG*4460 — Robotic Systems</div>
+          <div class="course" tabindex="0" data-desc="Capstone proposal: team formation, advisor selection, scope/objectives, plan for ENGG*4170.">ENGG*4000 — Proposal for Engineering Design IV</div>
+          <div class="course" tabindex="0" data-desc="Real-time systems: RT control & modeling, RTOS primitives/IPC, scheduling (uni/multiprocessor), fault tolerance.">ENGG*4420 — Real-Time Systems Design</div>
+          <div class="course" tabindex="0" data-desc="Capstone: complete CE design with socio-economic & environmental assessment; reports & poster to pro standard.">ENGG*4170 — Computer Engineering Design IV</div>
+          <div class="course" tabindex="0" data-desc="Advanced CPU topics: deep pipelines/ILP, TLP/MP, caches/VM, interconnects, storage, modern arch trade-offs.">ENGG*4540 — Advanced Computer Architecture</div>
+          <div class="course" tabindex="0" data-desc="VLSI digital design: MOS devices, CMOS logic, dynamic circuits, latches/registers, timing, adders/multipliers, memory, low power.">ENGG*4550 — VLSI Digital Design</div>
+          <div class="course" tabindex="0" data-desc="Architecture at scale: styles, case studies, modeling/specification, and tooling; analyze/redesign an existing system.">ENGG*4450 — Large-Scale Software Architecture Eng.</div>
+          <div class="course" tabindex="0" data-desc="Robot kinematics, trajectory planning, languages, sensors, and applications (assembly/manufacturing/medical/services).">ENGG*4460 — Robotic Systems</div>
         </div>
-
+      </div>
     </section>
 
     <!-- EXPERIENCE -->
@@ -1381,51 +1626,75 @@
           <p>Roles, education, and highlights.</p>
         </header>
 
-        <section class="about-grid reveal" style="margin-bottom:16px">
-          <img class="about-img" src="images/moamin-alt.jpg" alt="Working shot" />
+        <div class="exp-summary reveal">
+          <img src="images/moamin-alt.jpg" alt="Moamin working" />
           <div>
-            <h3>Summary</h3>
-            <p>Computer Engineering graduate and Technical Operations Coordinator at AJ Concord General Services Inc.
-              with experience across web, embedded, and automation projects.
-              I bridge technical design and real-world operations coordinating teams,
-              optimizing workflows, and building software that simplifies how work gets done.</p>
-            <div class="highlights">
+            <h3 style="font-family:var(--font-display);font-size:1.4rem;font-weight:700;letter-spacing:-.3px;margin-bottom:12px;">Summary</h3>
+            <p style="color:var(--muted2);line-height:1.7;">Computer Engineering graduate and Software Developer with experience shipping production-grade web applications, AI-driven systems, and internal tooling at real companies. I bridge technical design and real-world operations — coordinating teams, optimizing workflows, and building software that simplifies how work gets done.</p>
+            <div class="highlights" style="margin-top:16px;">
               <div class="highlight"><span>25%</span> efficiency gain via automation</div>
               <div class="highlight"><span>60%</span> faster customer responses</div>
-              <div class="highlight"><span>40%</span> faster APIs</div>
+              <div class="highlight"><span>40%</span> faster API latency</div>
+              <div class="highlight"><span>80%</span> email approval rate</div>
             </div>
           </div>
-        </section>
+        </div>
 
         <ol class="timeline">
           <li class="reveal">
-            <div class="time">Apr 2023 – Present</div>
+            <div class="time">Sep 2024 – Present</div>
             <div class="content">
-              <h3>Technical Operations Coordinator — AJ Concord General Services Inc.</h3>
-              <p>Designed &amp; integrated digital tracking/scheduling/cost tools (~25% efficiency), automated invoices
-                with Excel, maintained web presence, and coordinated logistics end-to-end.</p>
+              <h3>Technical Operations & Software Coordinator — AJ Concord General Services Inc.</h3>
+              <p>Designed and deployed internal tooling using Python and advanced Excel automation (VBA, Power Query) to provide real-time tracking of project costs, crew schedules, and resource allocation.</p>
+              <ul>
+                <li>Reduced administrative overhead by 25% and improved budget adherence across all active projects.</li>
+                <li>Built and maintained the company website with on-page SEO — drove measurable increase in qualified inbound leads.</li>
+                <li>Engineered automated invoice generation with multi-layer data validation, eliminating recurring billing errors.</li>
+                <li>Architected real-time project tracking dashboards for live visibility into crew deployment and milestone progress.</li>
+              </ul>
               <ul class="pill-list small">
-                <li>Automation</li>
-                <li>Web Management</li>
-                <li>Excel</li>
+                <li>Python</li><li>Excel / VBA</li><li>Power Query</li><li>Web Management</li>
               </ul>
             </div>
           </li>
+
           <li class="reveal">
-            <div class="time">2021 – 2026</div>
+            <div class="time">Apr 2023 – Aug 2024</div>
+            <div class="content">
+              <h3>Software Developer & AI Intern — RadicalX</h3>
+              <p>Built and shipped production features on the RadicalX platform using React, Node.js, and Firebase — including the Missions module, subscription flows, and payout systems serving an active user base.</p>
+              <ul>
+                <li>Led design of automated transactional email systems achieving 80% internal approval rate.</li>
+                <li>Operated in Agile sprints: planning, peer code reviews, and cross-functional feature scoping.</li>
+              </ul>
+              <ul class="pill-list small">
+                <li>React</li><li>Node.js</li><li>Firebase</li><li>Agile</li>
+              </ul>
+            </div>
+          </li>
+
+          <li class="reveal">
+            <div class="time">Sept 2021 – Dec 2025</div>
             <div class="content">
               <h3>University of Guelph — B.Eng, Computer Engineering</h3>
-              <p>See the Coursework page for the full list of courses completed and registered.</p>
+              <p>See the <a class="inline-link" href="#/coursework" data-route>Coursework</a> page for the full list of completed and registered courses.</p>
             </div>
           </li>
         </ol>
       </div>
     </section>
+
   </main>
 
   <footer class="site-footer">
     <div class="container footer-inner">
-      <p>© <span id="y"></span> Moamin Al-Juboori</p>
+      <a class="brand" href="#/" style="font-size:.95rem;opacity:.7;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="#0e1624" stroke="var(--border)" />
+          <path d="M6 18V6l4.8 6L15.6 6v12" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        &copy; <span id="y"></span> Moamin Al-Juboori
+      </a>
       <a href="#/" class="to-top" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></a>
     </div>
   </footer>
@@ -1442,12 +1711,11 @@
       });
     }
 
-    // --- Theme: light/dark with icon swap + persistence
+    // --- Theme toggle
     const root = document.documentElement;
     const modeToggle = document.getElementById('modeToggle');
     const modeIcon = document.getElementById('modeIcon');
-    const saved = localStorage.getItem('theme');
-    if (saved === 'light') root.classList.add('light');
+    if (localStorage.getItem('theme') === 'light') root.classList.add('light');
 
     function updateModeIcon() {
       const light = root.classList.contains('light');
@@ -1461,7 +1729,7 @@
       updateModeIcon();
     });
 
-    // --- Simple hash router
+    // --- Hash router
     const routes = {
       '/': 'page-home',
       '/skills': 'page-skills',
@@ -1479,16 +1747,16 @@
     function render() {
       const hash = location.hash.replace('#', '') || '/';
       const pageId = routes[hash] || routes['/'];
-      // --- Auto-sort coursework 1000 -> 4000
+
+      // Auto-sort coursework
       if (pageId === 'page-coursework') {
         const grid = document.querySelector('#page-coursework .course-grid');
         if (grid) {
           const items = Array.from(grid.children);
-          const number = (el) => {
-            const m = el.textContent.match(/\*(\d{4})/);
-            return m ? parseInt(m[1], 10) : 0;
-          };
-          items.sort((a, b) => number(a) - number(b));
+          items.sort((a, b) => {
+            const n = el => { const m = el.textContent.match(/\*(\d{4})/); return m ? parseInt(m[1], 10) : 0; };
+            return n(a) - n(b);
+          });
           items.forEach(el => grid.appendChild(el));
         }
       }
@@ -1496,52 +1764,49 @@
       document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
       document.getElementById(pageId).classList.add('active');
       setActiveNav(hash);
-
-      // kick off reveal animations for visible page (and show if already on-screen)
       document.querySelectorAll('#' + pageId + ' .reveal').forEach(el => el.classList.remove('visible'));
       setTimeout(() => revealNow(document.getElementById(pageId)), 0);
-
-      // Close mobile menu after nav
       if (navLinks) navLinks.classList.remove('open');
       window.scrollTo({ top: 0, behavior: 'auto' });
     }
+
     window.addEventListener('hashchange', render);
-    window.addEventListener('load', () => {
-      render();
-      revealNow(document);
+    window.addEventListener('load', () => { render(); revealNow(document); });
+
+    // Handle data-route clicks (for non-anchor elements)
+    document.addEventListener('click', e => {
+      const el = e.target.closest('[data-route]');
+      if (el && el.tagName !== 'A') {
+        e.preventDefault();
+        location.hash = el.getAttribute('href') || '#/';
+      }
     });
 
-    // --- Scroll reveal animations (no-scroll-on-load fix)
+    // --- Scroll reveal
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add('visible');
-      });
-    }, { threshold: 0.14 });
+      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
 
     function revealNow(scope = document) {
-      const els = scope.querySelectorAll('.reveal');
-      els.forEach(el => {
+      scope.querySelectorAll('.reveal').forEach(el => {
         observer.observe(el);
         const r = el.getBoundingClientRect();
-        if (r.top < window.innerHeight * 0.86) el.classList.add('visible');
+        if (r.top < window.innerHeight * 0.9) el.classList.add('visible');
       });
     }
 
-
-    // --- Parallax on hero portrait (home only)
-    const heroParallax = () => {
-      const el = document.querySelector('#page-home .hero-portrait');
-      if (!el) return;
-      el.style.transform = `translateY(${window.scrollY * 0.15}px)`;
-    };
+    // --- Parallax hero portrait
     window.addEventListener('scroll', () => {
-      if (document.getElementById('page-home').classList.contains('active')) heroParallax();
+      if (document.getElementById('page-home').classList.contains('active')) {
+        const el = document.querySelector('#page-home .hero-portrait');
+        if (el) el.style.transform = `translateY(${window.scrollY * 0.12}px)`;
+      }
     });
 
-    // --- Projects filtering
+    // --- Projects filter
     const filter = (cat) => {
       document.querySelectorAll('#page-projects .filter-btn').forEach(b => b.classList.toggle('active', b.dataset.filter === cat));
-      document.querySelectorAll('#page-projects #project-cards .card').forEach(c => {
+      document.querySelectorAll('#project-cards .card').forEach(c => {
         c.style.display = (cat === 'all' || c.dataset.category.includes(cat)) ? '' : 'none';
       });
     };
@@ -1549,7 +1814,7 @@
       b.addEventListener('click', () => filter(b.dataset.filter));
     });
 
-    // --- Contact form (Google Apps Script endpoint)
+    // --- Contact form
     const form = document.forms['submit-to-google-sheet'];
     if (form) {
       const success = document.getElementById('success-message');
@@ -1558,14 +1823,13 @@
         e.preventDefault();
         try {
           if (!scriptURL) {
-            alert("Thanks! The form is temporarily offline — please email me: moamin.aljuboori@gmail.com");
+            alert("Thanks! The form is temporarily offline — please email me directly: moamin.aljuboori@gmail.com");
             return;
           }
           await fetch(scriptURL, { method: 'POST', body: new FormData(form) });
           form.reset();
           success.style.display = 'block';
-          setTimeout(() => success.style.display = 'none', 1800);
-
+          setTimeout(() => success.style.display = 'none', 3000);
         } catch (err) { console.error(err); }
       });
     }
@@ -1574,5 +1838,4 @@
     document.getElementById('y').textContent = new Date().getFullYear();
   </script>
 </body>
-
 </html>
